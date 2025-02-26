@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Bites</title>
+    <link rel="icon" type="image/png" href="./Images/Green.png">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&family=Cabin:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel = "stylesheet" href="style.css">>
+</head>
+<body>
+    <nav>
+        <a href="./tsa-documentation.html" class="tsa-doc-btn">
+            <i class="fas fa-file-alt"></i>
+            Reference Page
+        </a>
+        <div class="current-section-title">Home</div>
+        <button class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#home" onclick="showSection('home')">Home</a></li>
+            <li><a href="#process" onclick="showSection('process')">Our Process</a></li>
+            <li><a href="#reservation" onclick="showSection('reservation')">Reserve / Order</a></li>
+            <li><a href="#about-us" onclick="showSection('about-us')">About Us</a></li>
+            <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="home" class="section active parallax home-parallax">
+        <div class="hero-content ">
+            <div class="circle-container">
+                
+                <div class="restaurant-name">Green Bites</div>
+                <div class="restaurant-quote">"Nature's Flavors, Crafted with Care"</div>
+            </div>
+        </div>
+        <div class="facts-carousel">
+            <div class="facts-track">
+                <div class="fact-card">
+                    <h3>Emma Rodriguez 🌟</h3>
+                    <p>Buddha Bowl perfection! Quinoa and roasted veggies that'll make your taste buds dance. 🥦🥕💃</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Nishanth Dommety 👍</h3>
+                    <p>Vegan Pad Thai that'll convert any skeptic. That spicy almond sauce is pure magic! 🍜🌶️✨</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Sophia Patel 💖</h3>
+                    <p>Spring rolls so fresh, they're basically edible sunshine. Lunch goals right here! ☀️🌱😋</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Jordan Stone 😎</h3>
+                    <p>Cauliflower steak that makes you forget meat even exists. Culinary wizardry! 🥩🚫🧙‍♂️</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Olivia Kim 😊</h3>
+                    <p>Mediterranean Wrap: Crispy falafel, dreamy hummus. Flavor explosion in every bite! 🌯🥙💥</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Balaharish Saravanan 💪</h3>
+                    <p>Jackfruit 'Crab' Cakes? More like mind-blowing deliciousness. Vegan food for the win! 🦀🤯🏆</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Isabella Thompson 🎨</h3>
+                    <p>Mushroom Tartare: Edible art that tastes even better than it looks. Gourmet magic! 🍄🎨🌟</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Theodore Adams ✨</h3>
+                    <p>Miso Soup: A warm hug in a bowl. Comfort food at its absolute finest. 🍜😊💯</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Emma Tret 💫</h3>
+                    <p>Bruschetta: that'll transport you straight to Italy. Sourdough dreams come true! 🤤😋🤌</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Abraham Justin 😎</h3>
+                    <p>Thai Green Curry: A flavor postcard from Thailand. Spice level: perfection! 🌿😋🌶️</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Justin Luck 🍀</h3>
+                    <p>Beet Carpaccio: so pretty, you'll hesitate to eat it. Cashew cheese = plant-based magic! 🤩🌱💜</p>
+                </div>
+                <div class="fact-card">
+                    <h3>Sophie Grace 🦋</h3>
+                    <p>WWild Mushroom Risotto: Creamy, earthy comfort in every single bite. Soul-satisfying! 🍄😋😌</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process" class="section">
+        <div class="parallax process-parallax section">
+            <div class="process-container hidden">
+                <h2>From Farm to Table</h2>
+                <div class="process-steps">
+                    <!-- Desktop Process Buttons -->
+                    <div class="process-buttons">
+                        <button class="process-button active" onclick="showProcessContent(0)">
+                            <i class="fas fa-seedling"></i>
+                            <h3>Harvesting</h3>
+                        </button>
+                        <button class="process-button" onclick="showProcessContent(1)">
+                            <i class="fas fa-clipboard-check"></i>
+                            <h3>Selection</h3>
+                        </button>
+                        <button class="process-button" onclick="showProcessContent(2)">
+                            <i class="fas fa-mortar-pestle"></i>
+                            <h3>Preparation</h3>
+                        </button>
+                        <button class="process-button" onclick="showProcessContent(3)">
+                            <i class="fas fa-utensils"></i>
+                            <h3>Serving</h3>
+                        </button>
+                        <button class="process-button" onclick="showProcessContent(4)">
+                            <i class="fas fa-leaf"></i>
+                            <h3>Sustainability</h3>
+                        </button>
+                    </div>
+                    
+                    <!-- Mobile Process Selection -->
+                    <div class="mobile-process-select">
+                        <div class="process-option active" onclick="showProcessContent(0)">
+                            <i class="fas fa-seedling"></i>
+                        <h3>1. Harvesting</h3>
+                    </div>
+                        <div class="process-option" onclick="showProcessContent(1)">
+                            <i class="fas fa-clipboard-check"></i>
+                        <h3>2. Selection</h3>
+                    </div>
+                        <div class="process-option" onclick="showProcessContent(2)">
+                            <i class="fas fa-mortar-pestle"></i>
+                        <h3>3. Preparation</h3>
+                    </div>
+                        <div class="process-option" onclick="showProcessContent(3)">
+                            <i class="fas fa-utensils"></i>
+                        <h3>4. Serving</h3>
+                        </div>
+                        <div class="process-option" onclick="showProcessContent(4)">
+                            <i class="fas fa-leaf"></i>
+                            <h3>5. Sustainability</h3>
+                        </div>
+                    </div>
+                    
+                    <!-- Content Display -->
+                    <div class="process-content">
+                        <div class="content-inner"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reservation" class="section">
+        <div class="parallax reservation-parallax">
+            <h2 class="section-header" style="color: var(--light-text); margin-bottom: 2rem; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Reserve / Order Online</h2>
+            <div class="reservation-container">
+                <div class="choice-buttons">
+                    <button onclick="showReservationForm()" class="choice-btn">
+                        <i class="fas fa-calendar-alt"></i>
+                        Make a Reservation
+                    </button>
+                    <button onclick="showOrderForm()" class="choice-btn">
+                        <i class="fas fa-shopping-bag"></i>
+                        Order Online
+                    </button>
+                </div>
+
+                <!-- Reservation Form -->
+                <form class="reservation-form" style="display: none;">
+                    <div class="form-header">
+                        <h3>Table Reservation</h3>
+                        <p class="form-subtitle">Reserve your table up to one month in advance</p>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="guestName">Full Name</label>
+                            <input type="text" id="guestName" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guestEmail">Email</label>
+                            <input type="email" id="guestEmail" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guestPhone">Phone (Optional)</label>
+                            <input type="tel" id="guestPhone">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="guestCount">Number of Guests</label>
+                            <select id="guestCount" required>
+                                <option value="">Select number of guests</option>
+                                <option value="1">1 Guest</option>
+                                <option value="2">2 Guests</option>
+                                <option value="3">3 Guests</option>
+                                <option value="4">4 Guests</option>
+                                <option value="5">5 Guests</option>
+                                <option value="6">6 Guests</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reservationDate">Date</label>
+                            <input type="date" id="reservationDate" required>
+                            <small class="error-message"></small>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="reservationTime">Time</label>
+                            <select id="reservationTime" required disabled>
+                                <option value="">Select date first</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">Confirm Reservation</button>
+                </form>
+
+                <!-- Order Form -->
+                <div class="order-form" style="display: none;">
+                    <div class="menu-section">
+                        <h3 id="menuTitle">Current Menu</h3>
+                        <div class="menu-items" id="menuItems">
+                            <!-- Menu items will be populated by JavaScript -->
+                        </div>
+                        <div class="cart-section">
+                            <h3>Your Order</h3>
+                            <div id="cartItems"></div>
+                            <div class="total"><span id="cartTotal">$0.00</span></div>
+                            <button onclick="checkout()" class="checkout-btn">Proceed to Checkout</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Moved About Us Section -->
+    <section id="about-us" class="section">
+        <div class="container">
+            <h2 style="text-align: center;">Our Journey</h2>
+            <div class="about-us-content">
+                <div class="about-us-grid">
+                    <div class="about-us-text vision" style="position: relative; background-image: url('Images/opennow.jpg'); background-size: cover; background-position: center; color: red;">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+                        <h3 style="position: relative; z-index: 2; color: red;">Our History</h3>
+                        <p style="position: relative; z-index: 2; color: red;">Founded in 2024 in Charlotte, NC, Green Bites is dedicated to revolutionizing the presentation of vegan foods. We believe that restaurants should prioritize environmental sustainability while offering delicious plant-based options that delight the senses. Our mission extends beyond the plate; we aim to educate our community about the benefits of plant-based eating and sustainable practices. By collaborating with local farmers and utilizing innovative cooking techniques, we strive to create a dining experience that is both enjoyable and environmentally responsible.</p>
+                    </div>
+                    <div class="about-us-text mission" style="position: relative; background-image: url('Images/restaurantkitchen.jpg'); background-size: cover; color: white;">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+                        <h3 style="position: relative; z-index: 2; color: #FFD700;">Our Mission</h3>
+                        <p style="position: relative; z-index: 2; color: #FFD700;">Every meal is a statement. We challenge the status quo by proving that sustainable, plant-based dining can be simultaneously delicious, technologically advanced, and environmentally responsible. Our approach goes beyond food – we're reimagining the entire ecosystem of dining.</p>
+                    </div>
+                    <div class="about-us-text impact" style="background-image: url('Images/agriculture.jpg'); background-size: cover; color: white;">
+                        <h3>Our Impact</h3>
+                        <p>Through strategic partnerships with tech-driven farms, we're pioneering precision agriculture that reduces carbon footprints, supports local economies, and demonstrates how technology can revolutionize food production. We're not just serving meals; we're cultivating a sustainable future.</p>
+                    </div>
+                </div>
+                <!-- New Box for Our Future Goals -->
+                <div class="about-us-text goals" style="background-image: url('Images/future.jpg'); background-size: cover; color: white;">
+                    <h3>Our Future Goals</h3>
+                    <ul>
+                        <li>Expand our network of sustainable, technology-driven farms</li>
+                        <li>Create exciting new ways to prepare delicious plant-based dishes</li>
+                        <li>Spread the word about how we can all support sustainable food</li>
+                        <li>Show restaurants how to be more sustainable and join the effort.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-header">Contact Us</h2>
+            <div class="contact-info ">
+                <div class="contact-card hidden left contact-stagger">
+                    <h3><i class="fas fa-map-marker-alt"></i> Address</h3>
+                    <p><a href="https://www.google.com/maps/search/?api=1&query=8440+Rea+Rd+Charlotte+NC+28277" target="_blank" class="address-link" style="color: inherit;">8440 Rea Rd Charlotte, NC 28277</a></p>
+                </div>
+                <div class="contact-card hidden left contact-stagger">
+                    <h3><i class="fas fa-phone-alt"></i> Phone</h3>
+                    <p><a href="tel:+13028277701" class="address-link" style="color: inherit;">(302) 827-7701</a></p>
+                </div>
+                <div class="contact-card hidden left contact-stagger">
+                    <h3><i class="fas fa-envelope"></i> Email</h3>
+                    <p><a href="mailto:requestsandenquires@greenbites.shop" class="address-link" style="color: inherit;">requestsandenquires@greenbites.shop</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script type="text/javascript" src="script.js"></script>
+</body>
+
+<footer style="text-align: center; padding: 20px 0; background-color: var(--primary-color); color: var(--light-text); font-family: 'Playfair Display', serif; position: relative;">
+    <div style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-size: 0.8em; text-align: left;">
+        Open 7 Days<br>
+        Lunch: 11 AM - 3 PM<br>
+        Dinner: 5 PM - 11 PM
+    </div>
+    <p>&copy; 2025 GREEN BITES TEAM</p>
+    <img src="./Images/Green.png" alt="Green Bites Logo" style="position: absolute; right: 20px; top: 50%; transform: translateY(-50%); max-height: 50px; object-fit: contain;">
+</footer>
+</html>

@@ -25,6 +25,7 @@
             <li><a href="#home" onclick="showSection('home')">Home</a></li>
             <li><a href="#process" onclick="showSection('process')">Our Process</a></li>
             <li><a href="#reservation" onclick="showSection('reservation')">Reserve / Order</a></li>
+            <li><a href="#our-services" onclick="showSection('our-services')">Our Services</a></li>
             <li><a href="#about-us" onclick="showSection('about-us')">About Us</a></li>
             <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
         </ul>
@@ -238,6 +239,32 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section id="our-services" class="section">
+        <h2 class="section-header" style="text-align: center; margin-bottom: 2rem;">Our Services</h2>
+        <div class="services-container">
+            <div class="service-box" onclick="showService('meal-plans')">
+                <h3>Meal Plans</h3>
+                <p>Customized meal plans tailored to your dietary needs and preferences.</p>
+            </div>
+            <div class="service-box" onclick="showService('catering')">
+                <h3>Catering</h3>
+                <p>Delicious plant-based catering options for your events and gatherings.</p>
+            </div>
+            <div class="service-box" onclick="showService('farms')">
+                <h3>Food Translator</h3>
+                <p>Learn about our partnerships with local farms and sustainable practices.</p>
+            </div>
+            <div class="service-box" onclick="showService('virtual-tour')">
+                <h3>Virtual Tour</h3>
+                <p>Experience our kitchen and farm through an interactive virtual tour.</p>
+            </div>
+        </div>
+        <div id="service-content" class="service-content" style="display: none;">
+            <button class="back-button" onclick="backToServices()">← Back</button>
+            <div id="content-area"></div>
         </div>
     </section>
 

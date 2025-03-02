@@ -1653,18 +1653,18 @@
             checkoutForm.innerHTML = `
                 <div class="form-header">
                     <h3>Order Details</h3>
-                    </div>
+                </div>
                 <div class="form-group">
                     <label for="orderName">Name*</label>
                     <input type="text" id="orderName" required>
-                    </div>
+                </div>
                 
                 <div class="form-group">
                     <label for="pickupTime">Pickup Time*</label>
                     <select id="pickupTime" required>
                         <option value="">Select pickup time</option>
                     </select>
-                    </div>
+                </div>
                 <button type="button" class="submit-btn" onclick="processOrder()">Place Order</button>
                 <button type="button" class="cancel-btn" onclick="returnToReservation()">Cancel</button>
             `;
@@ -1777,971 +1777,344 @@
             }
         }
 
-        function showService(service) {
-            // Hide the services container
-            document.querySelector('.services-container').style.display = 'none';
-            document.querySelector('#service-content').style.display = 'block';
+        // Services Section Functions
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize services section
+            initializeServices();
+            
+            // Set up meal plan selection
+            setupMealPlans();
+            
+            // Set up farm cards
+            setupFarmCards();
+            
+            // Set up food generator
+            setupFoodGenerator();
+            
+            // Set up notification form
+            setupNotificationForm();
+        });
 
-            // Set the content based on the service clicked
-            const contentArea = document.getElementById('content-area');
-            switch (service) {
-                case 'meal-plans':
-                    contentArea.innerHTML = `
-                        <h3>Meal Plans</h3>
-                        <div class="meal-plan-cards">
-                            <div class="meal-card">
-                                <span class="specialization">Muscle Gain</span>
-                                <h4>Protein Plan</h4>
-                                <p>Breakfast: Vegan Protein Smoothie</p>
-                                <p>Lunch: Quinoa Salad with Chickpeas</p>
-                                <p>Dinner: Grilled Tofu with Vegetables</p>
-                                <div class="meal-content-divider"></div>
-                                <div class="meal-buttons">
-                                    <button onclick="showMealPlanOrderForm('Protein Plan')">Order Now</button>
-                                    <button onclick="showMealDetails('Protein Plan', 2200, 'High protein, moderate carbs, low fat', 'Soy, Nuts', 'Muscle Gain', 'Refrigerate up to 3 days')">More Details</button>
-                                </div>
-                            </div>
-                            <div class="meal-card">
-                                <span class="specialization">Energy Boost</span>
-                                <h4>Carb Plan</h4>
-                                <p>Breakfast: Oatmeal with Fruits</p>
-                                <p>Lunch: Brown Rice with Stir-Fried Veggies</p>
-                                <p>Dinner: Pasta Primavera</p>
-                                <div class="meal-content-divider"></div>
-                                <div class="meal-buttons">
-                                    <button onclick="showMealPlanOrderForm('Carb Plan')">Order Now</button>
-                                    <button onclick="showMealDetails('Carb Plan', 2400, 'High carbs, moderate protein, low fat', 'Gluten, Wheat', 'Energy Boost', 'Refrigerate up to 4 days')">More Details</button>
-                                </div>
-                            </div>
-                            <div class="meal-card">
-                                <span class="specialization">Weight Loss</span>
-                                <h4>Weight Loss Plan</h4>
-                                <p>Breakfast: Avocado Toast</p>
-                                <p>Lunch: Lentil Soup</p>
-                                <p>Dinner: Zucchini Noodles with Marinara</p>
-                                <div class="meal-content-divider"></div>
-                                <div class="meal-buttons">
-                                    <button onclick="showMealPlanOrderForm('Weight Loss Plan')">Order Now</button>
-                                    <button onclick="showMealDetails('Weight Loss Plan', 1600, 'Moderate protein, low carbs, moderate fat', 'Gluten, Nuts', 'Weight Loss', 'Refrigerate up to 3 days')">More Details</button>
-                                </div>
-                            </div>
-                            <div class="meal-card">
-                                <span class="specialization">Overall Health</span>
-                                <h4>Balanced Diet Plan</h4>
-                                <p>Breakfast: Chia Seed Pudding</p>
-                                <p>Lunch: Buddha Bowl</p>
-                                <p>Dinner: Stuffed Bell Peppers</p>
-                                <div class="meal-content-divider"></div>
-                                <div class="meal-buttons">
-                                    <button onclick="showMealPlanOrderForm('Balanced Diet Plan')">Order Now</button>
-                                    <button onclick="showMealDetails('Balanced Diet Plan', 2000, 'Balanced protein, carbs, and fat', 'Nuts, Seeds', 'Overall Health', 'Refrigerate up to 5 days')">More Details</button>
-                                </div>
-                            </div>
-                            <div class="meal-card">
-                                <span class="specialization">Detoxification</span>
-                                <h4>Detox Plan</h4>
-                                <p>Breakfast: Green Smoothie</p>
-                                <p>Lunch: Kale Salad with Lemon Dressing</p>
-                                <p>Dinner: Vegetable Stir-Fry</p>
-                                <div class="meal-content-divider"></div>
-                                <div class="meal-buttons">
-                                    <button onclick="showMealPlanOrderForm('Detox Plan')">Order Now</button>
-                                    <button onclick="showMealDetails('Detox Plan', 1800, 'Low protein, moderate carbs, low fat', 'None', 'Detoxification', 'Consume within 2 days')">More Details</button>
-                                </div>
-                            </div>
-                            <div class="meal-card">
-                                <span class="specialization">Plant-Based</span>
-                                <h4>Vegan Plan</h4>
-                                <p>Breakfast: Smoothie Bowl</p>
-                                <p>Lunch: Vegan Burrito</p>
-                                <p>Dinner: Stuffed Eggplant</p>
-                                <div class="meal-content-divider"></div>
-                                <div class="meal-buttons">
-                                    <button onclick="showMealPlanOrderForm('Vegan Plan')">Order Now</button>
-                                    <button onclick="showMealDetails('Vegan Plan', 2100, 'Moderate protein, high carbs, moderate fat', 'Soy, Nuts, Gluten', 'Plant-Based', 'Refrigerate up to 4 days')">More Details</button>
-                                </div>
-                            </div>
-                            <div class="meal-card">
-                                <span class="specialization">Plant-Based</span>
-                                <h4>Vegetarian Plan</h4>
-                                <p>Breakfast: Plant-Based Yogurt with Granola</p>
-                                <p>Lunch: Vegan Caprese Salad with Tofu</p>
-                                <p>Dinner: Vegetable Lasagna with Cashew Cheese</p>
-                                <div class="meal-content-divider"></div>
-                                <div class="meal-buttons">
-                                    <button onclick="showMealPlanOrderForm('Vegetarian Plan')">Order Now</button>
-                                    <button onclick="showMealDetails('Vegetarian Plan', 2200, 'Moderate protein, moderate carbs, moderate fat', 'Soy, Gluten, Nuts', 'Plant-Based', 'Refrigerate up to 4 days')">More Details</button>
-                                </div>
-                            </div>
-                            <div class="meal-card">
-                                <span class="specialization">Low Carb</span>
-                                <h4>Keto Plan</h4>
-                                <p>Breakfast: Tofu Scramble with Spinach</p>
-                                <p>Lunch: Tempeh Salad with Avocado</p>
-                                <p>Dinner: Zucchini Noodles with Pesto</p>
-                                <div class="meal-content-divider"></div>
-                                <div class="meal-buttons">
-                                    <button onclick="showMealPlanOrderForm('Keto Plan')">Order Now</button>
-                                    <button onclick="showMealDetails('Keto Plan', 1900, 'High fat, moderate protein, very low carbs', 'Soy, Nuts', 'Low Carb', 'Refrigerate up to 3 days')">More Details</button>
-                                </div>
-                            </div>
-                            <div class="meal-card">
-                                <span class="specialization">Whole Foods</span>
-                                <h4>Paleo Plan</h4>
-                                <p>Breakfast: Fruit Salad with Coconut Cream</p>
-                                <p>Lunch: Jackfruit 'Pulled Pork' with Veggies</p>
-                                <p>Dinner: Mushroom Steaks with Asparagus</p>
-                                <div class="meal-content-divider"></div>
-                                <div class="meal-buttons">
-                                    <button onclick="showMealPlanOrderForm('Paleo Plan')">Order Now</button>
-                                    <button onclick="showMealDetails('Paleo Plan', 2000, 'High protein, low carbs, moderate fat', 'None', 'Whole Foods', 'Refrigerate up to 3 days')">More Details</button>
-                                </div>
-                            </div>
-                            <div class="meal-card">
-                                <span class="specialization">Gluten-Free</span>
-                                <h4>Gluten-Free Plan</h4>
-                                <p>Breakfast: Quinoa Porridge with Berries</p>
-                                <p>Lunch: Roasted Vegetable and Tempeh Salad</p>
-                                <p>Dinner: Stir-Fried Vegetables with Rice</p>
-                                <div class="meal-content-divider"></div>
-                                <div class="meal-buttons">
-                                    <button onclick="showMealPlanOrderForm('Gluten-Free Plan')">Order Now</button>
-                                    <button onclick="showMealDetails('Gluten-Free Plan', 2100, 'Moderate protein, moderate carbs, low fat', 'Soy', 'Gluten-Free', 'Refrigerate up to 4 days')">More Details</button>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    break;
-                case 'catering':
-                    contentArea.innerHTML = '<h3>Catering</h3><p>Details about our catering services will go here.</p>';
-                    break;
-                case 'farms':
-                    contentArea.innerHTML = '<h3>Food Translator</h3><p>Details about our farms will go here.</p>';
-                    break;
-                case 'virtual-tour':
-                    contentArea.innerHTML = '<h3>Virtual Tour</h3><p>Details about our virtual tour will go here.</p>';
-                    break;
-                default:
-                    contentArea.innerHTML = '<p>No details available.</p>';
+        // Backup initialization in case DOMContentLoaded doesn't fire properly
+        window.onload = function() {
+            // Check if services grid is visible
+            const servicesGrid = document.querySelector('.services-grid');
+            if (servicesGrid && window.getComputedStyle(servicesGrid).display === 'none') {
+                initializeServices();
             }
-        }
+        };
 
-        function backToServices() {
-            // Show the services container
-            document.querySelector('.services-container').style.display = 'flex';
-            document.querySelector('#service-content').style.display = 'none';
-        }
-
-        // Function to show meal plan details popup
-        function showMealDetails(planName, calories, nutrients, allergens, specialty, storage) {
-            // Create overlay
-            const overlay = document.createElement('div');
-            overlay.className = 'meal-details-overlay';
-            
-            // Create popup container
-            const popupContainer = document.createElement('div');
-            popupContainer.className = 'meal-details-popup';
-            
-            // Create popup content
-            popupContainer.innerHTML = `
-                <div class="meal-details-header">
-                    <h3>${planName}</h3>
-                    <button class="close-popup" onclick="closeMealDetails()">×</button>
-                </div>
-                <div class="meal-details-content">
-                    <div class="meal-details-section">
-                        <div class="meal-detail-item">
-                            <div class="detail-icon"><i class="fas fa-fire"></i></div>
-                            <div class="detail-info">
-                                <h4>Calories</h4>
-                                <p>${calories} kcal per day</p>
-                            </div>
-                        </div>
-                        
-                        <div class="meal-detail-item">
-                            <div class="detail-icon"><i class="fas fa-apple-alt"></i></div>
-                            <div class="detail-info">
-                                <h4>Nutrients</h4>
-                                <p>${nutrients}</p>
-                            </div>
-                        </div>
-                        
-                        <div class="meal-detail-item">
-                            <div class="detail-icon"><i class="fas fa-exclamation-circle"></i></div>
-                            <div class="detail-info">
-                                <h4>Allergens</h4>
-                                <p>${allergens}</p>
-                            </div>
-                        </div>
-                        
-                        <div class="meal-detail-item">
-                            <div class="detail-icon"><i class="fas fa-star"></i></div>
-                            <div class="detail-info">
-                                <h4>Specialty</h4>
-                                <p>${specialty}</p>
-                            </div>
-                        </div>
-                        
-                        <div class="meal-detail-item">
-                            <div class="detail-icon"><i class="fas fa-snowflake"></i></div>
-                            <div class="detail-info">
-                                <h4>Storage</h4>
-                                <p>${storage}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="meal-details-footer">
-                    <button class="order-now-btn" onclick="showMealPlanOrderForm('${planName}')">Order This Plan</button>
-                </div>
-            `;
-            
-            // Append popup to body
-            document.body.appendChild(overlay);
-            document.body.appendChild(popupContainer);
-            
-            // Prevent scrolling when popup is open
-            document.body.style.overflow = 'hidden';
-            
-            // Add event listener to close popup when clicking outside
-            overlay.addEventListener('click', closeMealDetails);
-        }
-
-        function closeMealDetails() {
-            // Remove popup and overlay
-            const popup = document.querySelector('.meal-details-popup');
-            const overlay = document.querySelector('.meal-details-overlay');
-            
-            if (popup) {
-                popup.remove();
+        function initializeServices() {
+            // Show the services grid by default
+            const servicesGrid = document.querySelector('.services-grid');
+            if (servicesGrid) {
+                servicesGrid.style.display = 'grid';
             }
             
-            if (overlay) {
-                overlay.remove();
+            // Hide the service content container by default
+            const serviceContentContainer = document.querySelector('.service-content-container');
+            if (serviceContentContainer) {
+                serviceContentContainer.style.display = 'none';
             }
             
-            // Re-enable scrolling
-            document.body.style.overflow = 'auto';
-        }
-
-        // Function to show meal plan order form
-        function showMealPlanOrderForm(primaryPlanName) {
-            // Close the meal details popup if it's open
-            closeMealDetails();
-            
-            // Create overlay
-            const overlay = document.createElement('div');
-            overlay.className = 'meal-details-overlay';
-            
-            // Create popup container
-            const popupContainer = document.createElement('div');
-            popupContainer.className = 'order-form-popup';
-            
-            // Get all available meal plans
-            const mealPlans = [
-                'Protein Plan',
-                'Carb Plan',
-                'Weight Loss Plan',
-                'Balanced Diet Plan',
-                'Detox Plan',
-                'Vegan Plan',
-                'Vegetarian Plan',
-                'Keto Plan',
-                'Paleo Plan',
-                'Gluten-Free Plan'
-            ];
-            
-            // Filter out the primary plan from additional options
-            const additionalOptions = mealPlans.filter(plan => plan !== primaryPlanName);
-            
-            // Create dropdown options for additional meal plans
-            let additionalPlanOptions = '';
-            additionalOptions.forEach(plan => {
-                additionalPlanOptions += `<option value="${plan}">${plan}</option>`;
+            // Hide all service contents
+            const serviceContents = document.querySelectorAll('.service-content');
+            serviceContents.forEach(content => {
+                content.style.display = 'none';
             });
             
-            // Create popup content
-            popupContainer.innerHTML = `
-                <div class="order-form-header">
-                    <h3>Complete Your Order</h3>
-                    <button class="close-popup" onclick="closeMealPlanOrderForm()">×</button>
-                </div>
-                <div class="order-form-content">
-                    <div class="order-form-section">
-                        <h4>Selected Plan</h4>
-                        <div class="selected-plans">
-                            <div class="plan-badge primary">
-                                <i class="fas fa-check-circle"></i> ${primaryPlanName}
-                            </div>
-                            
-                            <div class="additional-plan-container" id="additional-plan-container-1" style="display: none;">
-                                <div class="plan-badge secondary">
-                                    <i class="fas fa-check-circle"></i> <span class="additional-plan-display-1"></span>
-                                    <button class="remove-plan-btn" onclick="removeAdditionalPlan(1)">×</button>
-                                </div>
-                            </div>
-                            
-                            <div class="additional-plan-container" id="additional-plan-container-2" style="display: none;">
-                                <div class="plan-badge secondary">
-                                    <i class="fas fa-check-circle"></i> <span class="additional-plan-display-2"></span>
-                                    <button class="remove-plan-btn" onclick="removeAdditionalPlan(2)">×</button>
-                                </div>
-                            </div>
-                            
-                            <button class="add-plan-btn" id="add-plan-btn" onclick="showAddPlanOptions()">
-                                <i class="fas fa-plus"></i> Add Plan
-                            </button>
-                            
-                            <div class="add-plan-dropdown" id="add-plan-dropdown">
-                                <div class="dropdown-header">
-                                    <h5>Select a Plan</h5>
-                                    <button class="close-dropdown" onclick="hideAddPlanOptions()">×</button>
-                                </div>
-                                <div class="dropdown-options">
-                                    ${additionalOptions.map(plan => `
-                                        <div class="dropdown-option" onclick="addPlan('${plan}')">
-                                            ${plan}
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <h4>Personal Information</h4>
-                        <div class="form-group">
-                            <label for="customer-name">Full Name</label>
-                            <input type="text" id="customer-name" placeholder="Enter your full name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="customer-email">Email Address</label>
-                            <input type="email" id="customer-email" placeholder="Enter your email" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="customer-phone">Phone Number</label>
-                            <input type="tel" id="customer-phone" placeholder="Enter your phone number" required>
-                        </div>
-                        
-                        <h4>Delivery Address</h4>
-                        <div class="form-group">
-                            <label for="street-address">Street Address</label>
-                            <input type="text" id="street-address" placeholder="Enter your street address" required>
-                        </div>
-                        
-                        <div class="address-grid">
-                            <div class="form-group">
-                                <label for="city">City</label>
-                                <input type="text" id="city" placeholder="City" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="state">State</label>
-                                <input type="text" id="state" placeholder="State" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="zip">ZIP Code</label>
-                                <input type="text" id="zip" placeholder="ZIP Code" required>
-                            </div>
-                        </div>
-                        
-                        <h4>Subscription Duration</h4>
-                        <div class="form-group timeframe-group">
-                            <label for="timeframe">Select Duration</label>
-                            <div class="select-with-info">
-                                <select id="timeframe" required>
-                                    <option value="7">7 Days ($89.99/week)</option>
-                                    <option value="14">14 Days ($84.99/week)</option>
-                                    <option value="30">1 Month ($79.99/week)</option>
-                                    <option value="60">2 Months ($74.99/week)</option>
-                                </select>
-                                <div class="info-icon" tabindex="0">
-                                    <i class="fas fa-info-circle"></i>
-                                    <span class="tooltip">Meals are delivered weekly regardless of your plan duration. For example, a 7-day plan includes 7 days worth of meals delivered in weekly installments.</span>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="order-summary">
-                            <h4>Order Summary</h4>
-                            <div class="summary-item">
-                                <span>Primary Plan:</span>
-                                <span>${primaryPlanName}</span>
-                            </div>
-                            <div class="summary-item additional-plan-1-summary" style="display: none;">
-                                <span>Additional Plan 1:</span>
-                                <span class="additional-plan-1-name"></span>
-                            </div>
-                            <div class="summary-item additional-plan-2-summary" style="display: none;">
-                                <span>Additional Plan 2:</span>
-                                <span class="additional-plan-2-name"></span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Duration:</span>
-                                <span class="duration-display">7 Days</span>
-                            </div>
-                            <div class="summary-item">
-                                <span>Weekly Price:</span>
-                                <span class="price-display">$89.99</span>
-                            </div>
-                            <div class="summary-item total-price-summary">
-                                <span>Total Price:</span>
-                                <span class="total-price-display">$89.99</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="order-form-footer center-footer">
-                    <button class="submit-order-btn" onclick="submitOrder()">Complete Order</button>
-                </div>
-            `;
+            // Add click event listeners to service cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                // The onclick attribute is already set in the HTML
+                // This is just for additional functionality if needed
+                card.addEventListener('click', function() {
+                    const onclickAttr = this.getAttribute('onclick');
+                    if (onclickAttr) {
+                        // The onclick attribute is in the format: showServiceContent('service-id')
+                        // We don't need to add another event listener as it's handled by the inline onclick
+                    }
+                });
+            });
+        }
+
+        function showServiceContent(serviceId) {
+            // Hide all service contents
+            const serviceContents = document.querySelectorAll('.service-content');
+            serviceContents.forEach(content => {
+                content.style.display = 'none';
+            });
             
-            // Append popup to body
-            document.body.appendChild(overlay);
-            document.body.appendChild(popupContainer);
+            // Show the selected service content
+            const selectedContent = document.getElementById(serviceId);
+            if (selectedContent) {
+                selectedContent.style.display = 'block';
+                
+                // Hide the services grid
+                document.querySelector('.services-grid').style.display = 'none';
+                
+                // Show the service content container
+                document.querySelector('.service-content-container').style.display = 'block';
+                
+                // Scroll to the content
+                selectedContent.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
             
-            // Prevent scrolling when popup is open
-            document.body.style.overflow = 'hidden';
-            
-            // Add event listener to close popup when clicking outside
-            overlay.addEventListener('click', function(e) {
-                if (e.target === overlay) {
-                    closeMealPlanOrderForm();
+            // Update active state on service cards
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                card.classList.remove('active');
+                if (card.getAttribute('onclick').includes(serviceId)) {
+                    card.classList.add('active');
                 }
             });
-            
-            // Add event listeners for the timeframe select to update the summary
-            document.getElementById('timeframe').addEventListener('change', updateOrderSummary);
-            
-            // Initialize the summary
-            updateOrderSummary();
         }
 
-        // Function to show add plan dropdown
-        function showAddPlanOptions() {
-            const dropdown = document.getElementById('add-plan-dropdown');
-            dropdown.style.display = 'block';
-        }
-
-        // Function to hide add plan dropdown
-        function hideAddPlanOptions() {
-            const dropdown = document.getElementById('add-plan-dropdown');
-            dropdown.style.display = 'none';
-        }
-
-        // Function to add a plan
-        function addPlan(planName) {
-            const container1 = document.getElementById('additional-plan-container-1');
-            const container2 = document.getElementById('additional-plan-container-2');
-            const display1 = document.querySelector('.additional-plan-display-1');
-            const display2 = document.querySelector('.additional-plan-display-2');
-            const addButton = document.getElementById('add-plan-btn');
+        function hideServiceContent() {
+            // Hide the service content container
+            document.querySelector('.service-content-container').style.display = 'none';
             
-            // Check if container 1 is empty
-            if (container1.style.display === 'none') {
-                container1.style.display = 'block';
-                display1.textContent = planName;
-                
-                // Update summary
-                const summary1 = document.querySelector('.additional-plan-1-summary');
-                const name1 = document.querySelector('.additional-plan-1-name');
-                summary1.style.display = 'flex';
-                name1.textContent = planName;
-            } 
-            // Check if container 2 is empty
-            else if (container2.style.display === 'none') {
-                container2.style.display = 'block';
-                display2.textContent = planName;
-                
-                // Update summary
-                const summary2 = document.querySelector('.additional-plan-2-summary');
-                const name2 = document.querySelector('.additional-plan-2-name');
-                summary2.style.display = 'flex';
-                name2.textContent = planName;
-                
-                // Hide add button when both containers are filled
-                addButton.style.display = 'none';
+            // Show the services grid
+            document.querySelector('.services-grid').style.display = 'grid';
+            
+            // Scroll to the services section
+            document.querySelector('.services-grid').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function setupMealPlans() {
+            // Add click event listeners to meal plan buttons
+            const mealPlanButtons = document.querySelectorAll('.meal-plan-btn');
+            mealPlanButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const planName = this.closest('.meal-plan').querySelector('h4').textContent;
+                    alert(`Thank you for selecting the ${planName} plan! We'll contact you shortly with more details.`);
+                });
+            });
+        }
+
+        function setupFarmCards() {
+            // Add click event listeners to farm buttons
+            const farmButtons = document.querySelectorAll('.farm-btn');
+            farmButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const farmName = this.closest('.farm-card').querySelector('h4').textContent;
+                    alert(`You'll be redirected to more information about ${farmName} soon!`);
+                });
+            });
+        }
+
+        function setupFoodGenerator() {
+            // Add click event listener to generator button
+            const generatorButton = document.querySelector('.generator-btn');
+            if (generatorButton) {
+                generatorButton.addEventListener('click', generateMeal);
             }
-            
-            // Hide dropdown
-            hideAddPlanOptions();
-            
-            // Update order summary
-            updateOrderSummary();
         }
 
-        // Function to remove an additional plan
-        function removeAdditionalPlan(planNumber) {
-            const container = document.getElementById(`additional-plan-container-${planNumber}`);
-            const addButton = document.getElementById('add-plan-btn');
-            
-            // Hide the container
-            container.style.display = 'none';
-            
-            // Update summary
-            const summary = document.querySelector(`.additional-plan-${planNumber}-summary`);
-            summary.style.display = 'none';
-            
-            // Show add button
-            addButton.style.display = 'flex';
-            
-            // Update order summary
-            updateOrderSummary();
-        }
-
-        function updateOrderSummary() {
-            const timeframe = document.getElementById('timeframe');
-            const durationDisplay = document.querySelector('.duration-display');
-            const priceDisplay = document.querySelector('.price-display');
-            const totalPriceDisplay = document.querySelector('.total-price-display');
-            
-            // Count the number of selected plans
-            const primaryPlan = 1;
-            const additionalPlan1 = document.getElementById('additional-plan-container-1').style.display !== 'none' ? 1 : 0;
-            const additionalPlan2 = document.getElementById('additional-plan-container-2').style.display !== 'none' ? 1 : 0;
-            const totalPlans = primaryPlan + additionalPlan1 + additionalPlan2;
-            
-            // Get base price per week based on duration
-            let basePrice = 0;
-            const durationValue = timeframe.value;
-            let durationText = '';
-            let totalWeeks = 0;
-            
-            switch (durationValue) {
-                case '7':
-                    durationText = '7 Days';
-                    basePrice = 89.99;
-                    totalWeeks = 1;
-                    break;
-                case '14':
-                    durationText = '14 Days';
-                    basePrice = 84.99;
-                    totalWeeks = 2;
-                    break;
-                case '30':
-                    durationText = '1 Month';
-                    basePrice = 79.99;
-                    totalWeeks = 4;
-                    break;
-                case '60':
-                    durationText = '2 Months';
-                    basePrice = 74.99;
-                    totalWeeks = 8;
-                    break;
-                default:
-                    durationText = '7 Days';
-                    basePrice = 89.99;
-                    totalWeeks = 1;
-            }
-            
-            // Calculate weekly price (base price * number of plans)
-            const weeklyPrice = basePrice * totalPlans;
-            
-            // Calculate total price (weekly price * number of weeks)
-            const totalPrice = weeklyPrice * totalWeeks;
-            
-            // Update displays
-            durationDisplay.textContent = durationText;
-            priceDisplay.textContent = `$${weeklyPrice.toFixed(2)}`;
-            totalPriceDisplay.textContent = `$${totalPrice.toFixed(2)}`;
-        }
-
-        function closeMealPlanOrderForm() {
-            // Remove popup and overlay
-            const popup = document.querySelector('.order-form-popup');
-            const overlay = document.querySelector('.meal-details-overlay');
-            
-            if (popup) {
-                popup.remove();
-            }
-            
-            if (overlay) {
-                overlay.remove();
-            }
-            
-            // Re-enable scrolling
-            document.body.style.overflow = 'auto';
-        }
-
-        function submitOrder() {
+        function generateMeal() {
             // Get form values
-            const customerName = document.getElementById('customer-name').value;
-            const customerEmail = document.getElementById('customer-email').value;
-            const customerPhone = document.getElementById('customer-phone').value;
-            const streetAddress = document.getElementById('street-address').value;
-            const city = document.getElementById('city').value;
-            const state = document.getElementById('state').value;
-            const zip = document.getElementById('zip').value;
+            const dietaryPreference = document.getElementById('dietary-preference')?.value || 'all';
+            const mealType = document.getElementById('meal-type')?.value || 'lunch';
+            const calories = document.getElementById('calories')?.value || '500-700';
+            const cuisine = document.getElementById('cuisine')?.value || 'mediterranean';
+            const ingredients = document.getElementById('ingredients')?.value || '';
             
-            // Validate form
-            if (!customerName || !customerEmail || !customerPhone || !streetAddress || !city || !state || !zip) {
-                alert('Please fill in all required fields.');
-                return;
+            // Sample meal suggestions based on selections
+            const mealSuggestions = {
+                breakfast: [
+                    "Avocado Toast with Microgreens",
+                    "Acai Bowl with Fresh Berries",
+                    "Tofu Scramble with Vegetables",
+                    "Overnight Oats with Chia Seeds",
+                    "Quinoa Breakfast Bowl"
+                ],
+                lunch: [
+                    "Mediterranean Chickpea Salad",
+                    "Lentil and Vegetable Soup",
+                    "Buddha Bowl with Tahini Dressing",
+                    "Tempeh Wrap with Avocado",
+                    "Roasted Vegetable Grain Bowl"
+                ],
+                dinner: [
+                    "Mushroom Risotto with Truffle Oil",
+                    "Vegetable Curry with Basmati Rice",
+                    "Lentil Bolognese with Zucchini Noodles",
+                    "Stuffed Bell Peppers with Quinoa",
+                    "Eggplant Parmesan with Side Salad"
+                ],
+                snack: [
+                    "Hummus with Vegetable Sticks",
+                    "Trail Mix with Dried Fruits",
+                    "Roasted Chickpeas",
+                    "Avocado and Tomato on Rice Cakes",
+                    "Fruit Smoothie with Plant Protein"
+                ],
+                dessert: [
+                    "Coconut Milk Chia Pudding",
+                    "Vegan Chocolate Mousse",
+                    "Berry Crumble with Oat Topping",
+                    "Banana Nice Cream",
+                    "Avocado Chocolate Truffles"
+                ]
+            };
+            
+            // Get a random meal suggestion based on meal type
+            const suggestions = mealSuggestions[mealType] || mealSuggestions.lunch;
+            const randomIndex = Math.floor(Math.random() * suggestions.length);
+            const mealSuggestion = suggestions[randomIndex];
+            
+            // Create a description based on the selections
+            let description = `Your personalized ${mealType} is a ${cuisine}-inspired ${dietaryPreference} dish: <strong>${mealSuggestion}</strong>. `;
+            description += `This meal contains approximately ${calories.replace('-', ' to ')} calories and is prepared with seasonal, locally-sourced ingredients`;
+            
+            if (ingredients) {
+                description += `, including your favorite ingredients: ${ingredients}`;
             }
+            description += '.';
             
-            // Close the order form
-            closeMealPlanOrderForm();
+            // Add nutritional benefits
+            description += `<br><br><strong>Nutritional Benefits:</strong><br>• Rich in plant-based proteins<br>• High in fiber<br>• Contains essential vitamins and minerals<br>• Low in saturated fat`;
             
-            // Show confirmation message
-            const overlay = document.createElement('div');
-            overlay.className = 'meal-details-overlay';
+            // Add sustainability impact
+            description += `<br><br><strong>Sustainability Impact:</strong><br>• 80% lower carbon footprint than equivalent animal-based meal<br>• Supports local farmers<br>• Uses seasonal ingredients to reduce transportation emissions`;
             
-            const confirmationPopup = document.createElement('div');
-            confirmationPopup.className = 'confirmation-popup';
-            
-            confirmationPopup.innerHTML = `
-                <div class="confirmation-header">
-                    <i class="fas fa-check-circle"></i>
-                    <h3>Order Confirmed!</h3>
-                </div>
-                <div class="confirmation-content">
-                    <p>Thank you for your order, ${customerName}!</p>
-                    <p>We've sent a confirmation email to ${customerEmail} with your order details.</p>
-                    <p>Your first delivery will arrive on the following ${getNextMondayDate()}.</p>
-                </div>
-                <div class="confirmation-footer">
-                    <button onclick="closeConfirmation()">Close</button>
-                </div>
-            `;
-
-            document.body.appendChild(overlay);
-            document.body.appendChild(confirmationPopup);
-
-            // Prevent scrolling
-            document.body.style.overflow = 'hidden';
-
-            // Add event listener to close popup when clicking outside
-            overlay.addEventListener('click', closeConfirmation);
-        }
-
-        function getNextMondayDate() {
-            const today = new Date();
-            const dayOfWeek = today.getDay();
-            const daysUntilNextMonday = (8 - dayOfWeek) % 7;
-            const nextMonday = new Date(today);
-            nextMonday.setDate(today.getDate() + daysUntilNextMonday);
-            return nextMonday.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-        }
-
-        function closeConfirmation() {
-            // Remove confirmation popup and overlay
-            const popup = document.querySelector('.confirmation-popup');
-            const overlay = document.querySelector('.meal-details-overlay');
-            
-            if (popup) {
-                popup.remove();
-            }
-            
-            if (overlay) {
-                overlay.remove();
-            }
-            
-            // Re-enable scrolling
-            document.body.style.overflow = 'auto';
-        }
-
-        // Food Translator Functions
-        function translateFood() {
-            const searchInput = document.getElementById('food-search').value.trim();
-            if (!searchInput) {
-                showTranslationError("Please enter a food item to translate.");
-                return;
-            }
-            
-            // Show loading state
-            const resultsContainer = document.getElementById('translation-results');
-            resultsContainer.innerHTML = `
-                <div class="loading-animation">
-                    <div class="spinner"></div>
-                    <p>Translating your food...</p>
-                </div>
-            `;
-            
-            // Simulate API call with setTimeout
-            setTimeout(() => {
-                displayTranslationResults(searchInput);
-            }, 1500);
-        }
-        
-        function analyzeImage() {
-            const fileInput = document.getElementById('food-image');
-            const file = fileInput.files[0];
-            
-            if (!file) {
-                showTranslationError("Please select an image to analyze.");
-                return;
-            }
-            
-            // Check if file is an image
-            if (!file.type.match('image.*')) {
-                showTranslationError("Please select a valid image file.");
-                return;
-            }
-            
-            // Show loading state
-            const resultsContainer = document.getElementById('translation-results');
-            resultsContainer.innerHTML = `
-                <div class="loading-animation">
-                    <div class="spinner"></div>
-                    <p>Analyzing your image...</p>
-                </div>
-            `;
-            
-            // Create a FileReader to read the image
-            const reader = new FileReader();
-            
-            reader.onload = function(e) {
-                // Display the image preview
-                const imagePreview = `
-                    <div class="image-preview">
-                        <img src="${e.target.result}" alt="Uploaded food image">
+            // Display the result
+            const resultContainer = document.querySelector('.generator-result');
+            if (resultContainer) {
+                resultContainer.innerHTML = `
+                    <h4>Your Custom Meal</h4>
+                    <div class="meal-result">
+                        <p>${description}</p>
+                        <button class="order-meal-btn">Order This Meal</button>
                     </div>
                 `;
                 
-                // Simulate API call with setTimeout
-                setTimeout(() => {
-                    // Randomly select a food item to "detect" from the image
-                    const detectedFoods = [
-                        "Cheeseburger", 
-                        "Ice Cream", 
-                        "Milk Chocolate", 
-                        "Honey", 
-                        "Butter Chicken", 
-                        "Scrambled Eggs"
-                    ];
-                    const randomIndex = Math.floor(Math.random() * detectedFoods.length);
-                    const detectedFood = detectedFoods[randomIndex];
-                    
-                    displayTranslationResults(detectedFood, imagePreview);
-                }, 2000);
-            };
-            
-            reader.readAsDataURL(file);
-        }
-        
-        function quickSearch(food) {
-            document.getElementById('food-search').value = food;
-            translateFood();
-        }
-        
-        function displayTranslationResults(foodItem, imagePreview = '') {
-            const resultsContainer = document.getElementById('translation-results');
-            
-            // Database of vegan alternatives (simplified for demo)
-            const veganAlternatives = {
-                "cheese": {
-                    alternatives: ["Cashew Cheese", "Nutritional Yeast", "Vegan Cheese (Various Brands)"],
-                    recipes: ["Cashew Cheese Sauce", "Vegan Mac and Cheese"],
-                    products: ["Violife", "Daiya", "Follow Your Heart"]
-                },
-                "milk": {
-                    alternatives: ["Almond Milk", "Soy Milk", "Oat Milk", "Coconut Milk"],
-                    recipes: ["Homemade Oat Milk", "Cashew Milk"],
-                    products: ["Oatly", "Silk", "Alpro"]
-                },
-                "burger": {
-                    alternatives: ["Beyond Burger", "Impossible Burger", "Bean Burger", "Portobello Mushroom Burger"],
-                    recipes: ["Black Bean Burger", "Lentil Burger"],
-                    products: ["Beyond Meat", "Impossible Foods", "Dr. Praeger's"]
-                },
-                "ice cream": {
-                    alternatives: ["Coconut Milk Ice Cream", "Almond Milk Ice Cream", "Banana Nice Cream"],
-                    recipes: ["Frozen Banana Ice Cream", "Coconut Milk Vanilla Ice Cream"],
-                    products: ["Ben & Jerry's Non-Dairy", "So Delicious", "Oatly Ice Cream"]
-                },
-                "chocolate": {
-                    alternatives: ["Dark Chocolate (70%+)", "Vegan Chocolate", "Carob"],
-                    recipes: ["Homemade Vegan Chocolate", "Avocado Chocolate Mousse"],
-                    products: ["Endangered Species Dark Chocolate", "Hu Kitchen", "Alter Eco"]
-                },
-                "eggs": {
-                    alternatives: ["Tofu Scramble", "Chickpea Flour (for omelets)", "Flax Eggs (for baking)"],
-                    recipes: ["Tofu Scramble with Nutritional Yeast", "Chickpea Flour Omelet"],
-                    products: ["JUST Egg", "Follow Your Heart VeganEgg", "Bob's Red Mill Egg Replacer"]
-                },
-                "honey": {
-                    alternatives: ["Maple Syrup", "Agave Nectar", "Date Syrup"],
-                    recipes: ["Date Paste", "Apple Honey"],
-                    products: ["Bee Free Honee", "D'vash Date Nectar"]
-                },
-                "butter": {
-                    alternatives: ["Coconut Oil", "Vegan Butter", "Avocado"],
-                    recipes: ["Homemade Vegan Butter", "Cashew Butter"],
-                    products: ["Earth Balance", "Miyoko's", "Flora Plant Butter"]
-                },
-                "chicken": {
-                    alternatives: ["Tofu", "Tempeh", "Seitan", "Jackfruit"],
-                    recipes: ["Crispy Tofu Nuggets", "BBQ Jackfruit"],
-                    products: ["Gardein", "Beyond Meat Chicken", "Tofurky"]
-                },
-                "beef": {
-                    alternatives: ["Beyond Beef", "Impossible Beef", "Lentils", "Mushrooms"],
-                    recipes: ["Lentil Bolognese", "Mushroom Bourguignon"],
-                    products: ["Beyond Meat", "Impossible Foods", "Gardein"]
-                },
-                "fish": {
-                    alternatives: ["Tofu", "Hearts of Palm", "Banana Blossom"],
-                    recipes: ["Tofu Fish Sticks", "Chickpea Tuna Salad"],
-                    products: ["Good Catch", "Sophie's Kitchen", "Gardein Fishless Filets"]
-                },
-                "yogurt": {
-                    alternatives: ["Coconut Yogurt", "Almond Yogurt", "Soy Yogurt"],
-                    recipes: ["Homemade Coconut Yogurt"],
-                    products: ["So Delicious", "Kite Hill", "Forager"]
+                // Add click event listener to the order button
+                const orderButton = document.querySelector('.order-meal-btn');
+                if (orderButton) {
+                    orderButton.addEventListener('click', function() {
+                        alert(`Thank you for ordering ${mealSuggestion}! Your meal will be prepared with care using sustainable ingredients.`);
+                    });
                 }
-            };
-            
-            // Find the best match for the food item
-            const lowerCaseFood = foodItem.toLowerCase();
-            let bestMatch = null;
-            
-            for (const key in veganAlternatives) {
-                if (lowerCaseFood.includes(key) || key.includes(lowerCaseFood)) {
-                    bestMatch = key;
-                    break;
+            } else {
+                console.error('Generator result container not found');
+            }
+        }
+
+        function setupNotificationForm() {
+            // Add submit event listener to notification form
+            const notificationForm = document.querySelector('.notification-form');
+            if (notificationForm) {
+                notificationForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    const emailInput = this.querySelector('input[type="email"]');
+                    if (emailInput) {
+                        const email = emailInput.value;
+                        alert(`Thank you! We'll notify ${email} when our virtual tour is available.`);
+                        this.reset();
+                    } else {
+                        alert('Thank you for your interest! We\'ll notify you when our virtual tour is available.');
+                    }
+                });
+            } else {
+                console.error('Notification form not found');
+            }
+        }
+
+        // ... existing code ...
+
+        // Meal Plans Mobile Carousel
+        document.addEventListener('DOMContentLoaded', function() {
+            const mealPlansGrid = document.querySelector('.meal-plans-grid');
+            const paginationDots = document.querySelectorAll('.pagination-dot');
+            if (!mealPlansGrid) return;
+
+            let startX;
+            let scrollLeft;
+            let isDown;
+
+            // Function to check if device is mobile
+            function isMobileView() {
+                return window.innerWidth <= 768;
+            }
+
+            // Update active dot based on scroll position
+            function updateActiveDot() {
+                if (!isMobileView()) return; // Only update dots in mobile view
+                
+                const mealPlan = document.querySelector('.meal-plan');
+                const mealPlanWidth = mealPlan.offsetWidth + 20; // Width + gap
+                const scrollPosition = mealPlansGrid.scrollLeft;
+                const activeIndex = Math.round(scrollPosition / mealPlanWidth);
+
+                paginationDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === activeIndex);
+                });
+            }
+
+            // Handle dot click
+            paginationDots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    if (!isMobileView()) return; // Only handle clicks in mobile view
+                    
+                    const mealPlan = document.querySelector('.meal-plan');
+                    const mealPlanWidth = mealPlan.offsetWidth + 20;
+                    mealPlansGrid.scrollTo({
+                        left: index * mealPlanWidth,
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            // Touch events - only for mobile view
+            mealPlansGrid.addEventListener('touchstart', (e) => {
+                if (!isMobileView()) return;
+                
+                isDown = true;
+                startX = e.touches[0].pageX - mealPlansGrid.offsetLeft;
+                scrollLeft = mealPlansGrid.scrollLeft;
+            });
+
+            mealPlansGrid.addEventListener('touchend', () => {
+                if (!isMobileView()) return;
+                
+                isDown = false;
+                // Snap to nearest meal plan
+                const mealPlan = document.querySelector('.meal-plan');
+                const mealPlanWidth = mealPlan.offsetWidth + 20;
+                const scrollPosition = mealPlansGrid.scrollLeft;
+                const nearestMealPlan = Math.round(scrollPosition / mealPlanWidth) * mealPlanWidth;
+                
+                mealPlansGrid.scrollTo({
+                    left: nearestMealPlan,
+                    behavior: 'smooth'
+                });
+                updateActiveDot();
+            });
+
+            mealPlansGrid.addEventListener('touchmove', (e) => {
+                if (!isMobileView() || !isDown) return;
+                
+                e.preventDefault();
+                const x = e.touches[0].pageX - mealPlansGrid.offsetLeft;
+                const walk = (x - startX) * 2;
+                mealPlansGrid.scrollLeft = scrollLeft - walk;
+            });
+
+            // Update active dot on scroll
+            mealPlansGrid.addEventListener('scroll', () => {
+                if (isMobileView()) {
+                    requestAnimationFrame(updateActiveDot);
                 }
-            }
-            
-            if (!bestMatch) {
-                // If no direct match, use a default response
-                resultsContainer.innerHTML = `
-                    ${imagePreview}
-                    <div class="no-results">
-                        <h4>We couldn't find specific alternatives for "${foodItem}"</h4>
-                        <p>Try searching for a more common food item, or browse our popular searches below.</p>
-                        <div class="contact-suggestion">
-                            <p>Have a specific question? Contact our nutrition experts:</p>
-                            <button class="contact-btn">Contact Nutrition Expert</button>
-                        </div>
-                    </div>
-                `;
-                return;
-            }
-            
-            const alternatives = veganAlternatives[bestMatch];
-            
-            // Create HTML for the results
-            const alternativesHTML = alternatives.alternatives.map(alt => `<li>${alt}</li>`).join('');
-            const recipesHTML = alternatives.recipes.map(recipe => `<li>${recipe}</li>`).join('');
-            const productsHTML = alternatives.products.map(product => `<li>${product}</li>`).join('');
-            
-            resultsContainer.innerHTML = `
-                ${imagePreview}
-                <div class="translation-result">
-                    <div class="result-header">
-                        <h4>Vegan Alternatives for "${foodItem}"</h4>
-                        <p class="result-description">Here are some plant-based alternatives you can try:</p>
-                    </div>
-                    
-                    <div class="alternatives-grid">
-                        <div class="alternative-section">
-                            <h5><i class="fas fa-leaf"></i> Ingredients</h5>
-                            <ul class="alternatives-list">
-                                ${alternativesHTML}
-                            </ul>
-                        </div>
-                        
-                        <div class="alternative-section">
-                            <h5><i class="fas fa-utensils"></i> Recipes</h5>
-                            <ul class="alternatives-list">
-                                ${recipesHTML}
-                            </ul>
-                        </div>
-                        
-                        <div class="alternative-section">
-                            <h5><i class="fas fa-shopping-basket"></i> Products</h5>
-                            <ul class="alternatives-list">
-                                ${productsHTML}
-                            </ul>
-                        </div>
-                    </div>
-                    
-                    <div class="nutrition-comparison">
-                        <h5>Nutrition Comparison</h5>
-                        <div class="comparison-chart">
-                            <div class="chart-bar">
-                                <div class="bar-label">Protein</div>
-                                <div class="bar-container">
-                                    <div class="bar original" style="width: 80%;">Original</div>
-                                    <div class="bar vegan" style="width: 75%;">Vegan</div>
-                                </div>
-                            </div>
-                            <div class="chart-bar">
-                                <div class="bar-label">Fat</div>
-                                <div class="bar-container">
-                                    <div class="bar original" style="width: 90%;">Original</div>
-                                    <div class="bar vegan" style="width: 60%;">Vegan</div>
-                                </div>
-                            </div>
-                            <div class="chart-bar">
-                                <div class="bar-label">Fiber</div>
-                                <div class="bar-container">
-                                    <div class="bar original" style="width: 30%;">Original</div>
-                                    <div class="bar vegan" style="width: 85%;">Vegan</div>
-                                </div>
-                            </div>
-                            <div class="chart-bar">
-                                <div class="bar-label">Vitamins</div>
-                                <div class="bar-container">
-                                    <div class="bar original" style="width: 65%;">Original</div>
-                                    <div class="bar vegan" style="width: 80%;">Vegan</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="environmental-impact">
-                        <h5>Environmental Impact</h5>
-                        <div class="impact-comparison">
-                            <div class="impact-item">
-                                <i class="fas fa-tint"></i>
-                                <p>Water Usage</p>
-                                <div class="impact-meter">
-                                    <div class="impact original" style="height: 90%;"></div>
-                                    <div class="impact vegan" style="height: 30%;"></div>
-                                </div>
-                                <div class="impact-labels">
-                                    <span>Original</span>
-                                    <span>Vegan</span>
-                                </div>
-                            </div>
-                            <div class="impact-item">
-                                <i class="fas fa-cloud"></i>
-                                <p>CO2 Emissions</p>
-                                <div class="impact-meter">
-                                    <div class="impact original" style="height: 85%;"></div>
-                                    <div class="impact vegan" style="height: 25%;"></div>
-                                </div>
-                                <div class="impact-labels">
-                                    <span>Original</span>
-                                    <span>Vegan</span>
-                                </div>
-                            </div>
-                            <div class="impact-item">
-                                <i class="fas fa-tree"></i>
-                                <p>Land Use</p>
-                                <div class="impact-meter">
-                                    <div class="impact original" style="height: 95%;"></div>
-                                    <div class="impact vegan" style="height: 20%;"></div>
-                                </div>
-                                <div class="impact-labels">
-                                    <span>Original</span>
-                                    <span>Vegan</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            `;
-        }
-        
-        function showTranslationError(message) {
-            const resultsContainer = document.getElementById('translation-results');
-            resultsContainer.innerHTML = `
-                <div class="error-message">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <p>${message}</p>
-                </div>
-            `;
-        }
+            });
+
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                if (!isMobileView()) {
+                    // Reset scroll position when switching to tablet/desktop view
+                    mealPlansGrid.scrollLeft = 0;
+                }
+            });
+        });
+
+        // ... existing code ...

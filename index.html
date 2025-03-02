@@ -7,7 +7,35 @@
     <link rel="icon" type="image/png" href="./Images/Green.png">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500&family=Cabin:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel = "stylesheet" href="style.css">>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Fallback styles in case the CSS file doesn't load properly */
+        #services .services-parallax {
+            background-image: url('Images/agriculture.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            min-height: 100vh;
+            width: 100%;
+        }
+        #services .services-container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+        #services .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -25,7 +53,7 @@
             <li><a href="#home" onclick="showSection('home')">Home</a></li>
             <li><a href="#process" onclick="showSection('process')">Our Process</a></li>
             <li><a href="#reservation" onclick="showSection('reservation')">Reserve / Order</a></li>
-            <li><a href="#our-services" onclick="showSection('our-services')">Our Services</a></li>
+            <li><a href="#services" onclick="showSection('services')">Our Services</a></li>
             <li><a href="#about-us" onclick="showSection('about-us')">About Us</a></li>
             <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
         </ul>
@@ -242,29 +270,408 @@
         </div>
     </section>
 
-    <section id="our-services" class="section">
-        <h2 class="section-header" style="text-align: center; margin-bottom: 2rem;">Our Services</h2>
-        <div class="services-container">
-            <div class="service-box" onclick="showService('meal-plans')">
-                <h3>Meal Plans</h3>
-                <p>Customized meal plans tailored to your dietary needs and preferences.</p>
+    <!-- New Our Services Section -->
+    <section id="services" class="section">
+        <div class="parallax services-parallax">
+            <h2 class="section-header" style="color: var(--light-text); margin-bottom: 2.5rem; margin-top: 50px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Our Services</h2>
+            <div class="services-container">
+                <div class="services-grid">
+                    <div class="service-card" onclick="showServiceContent('meal-plans')">
+                        <div class="service-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h3>Meal Plans</h3>
+                        <p>Customized weekly meal plans tailored to your dietary preferences and nutritional needs.</p>
+                        <div class="service-btn">Explore</div>
+                    </div>
+                    
+                    <div class="service-card" onclick="showServiceContent('our-farms')">
+                        <div class="service-icon">
+                            <i class="fas fa-tractor"></i>
+                        </div>
+                        <h3>Our Farms</h3>
+                        <p>Discover our network of sustainable, technology-driven farms that supply our fresh ingredients.</p>
+                        <div class="service-btn">Discover</div>
+                    </div>
+                    
+                    <div class="service-card" onclick="showServiceContent('food-generator')">
+                        <div class="service-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3>Custom Food Generator</h3>
+                        <p>Create your perfect plant-based dish with our interactive food customization tool.</p>
+                        <div class="service-btn">Create</div>
+                    </div>
+                    
+                    <div class="service-card" onclick="showServiceContent('virtual-tour')">
+                        <div class="service-icon">
+                            <i class="fas fa-vr-cardboard"></i>
+                        </div>
+                        <h3>Virtual Tour</h3>
+                        <p>Take a virtual walk through our restaurant and farms to see our sustainable practices in action.</p>
+                        <div class="service-btn">Tour Now</div>
+                    </div>
+                </div>
+                
+                <!-- Service Content Sections -->
+                <div class="service-content-container">
+                    <div id="meal-plans" class="service-content">
+                        <div class="service-content-header">
+                            <button class="back-to-services" onclick="hideServiceContent()">
+                                <i class="fas fa-arrow-left"></i> Back to Services
+                            </button>
+                            <h3>Customized Meal Plans</h3>
+                        </div>
+                        <div class="service-content-body">
+                            <div class="meal-plans-grid">
+                                <!-- Meal Plan 1 -->
+                                <div class="meal-plan">
+                                    <div class="meal-plan-header">
+                                        <h4>Essential Green</h4>
+                                        <span class="meal-plan-price">$59.99/week</span>
+                                    </div>
+                                    <div class="meal-plan-body">
+                                        <p class="meal-plan-description">Starter Plant-Based Plan</p>
+                                        <div class="meal-examples">
+                                            <div class="meal-time">
+                                                <h5>Key Features:</h5>
+                                                <ul class="meal-features">
+                                                    <li>Simple 30-min recipes</li>
+                                                    <li>Weekly grocery list</li>
+                                                    <li>Common allergens: gluten, nuts, soy</li>
+                                                </ul>
+                                            </div>
+                                            <div class="meal-time">
+                                                <h5>Sample Meals:</h5>
+                                                <ul class="meal-features">
+                                                    <li>Breakfast: Overnight Oats with Fresh Fruit</li>
+                                                    <li>Lunch: Mediterranean Wrap (gluten)</li>
+                                                    <li>Dinner: Thai Green Curry (nuts)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="meal-plan-btn">Select Plan</button>
+                                </div>
+
+                                <!-- Meal Plan 2 -->
+                                <div class="meal-plan featured">
+                                    <div class="meal-plan-header">
+                                        <h4>Premium Balance</h4>
+                                        <span class="meal-plan-price">$79.99/week</span>
+                                        <span class="featured-badge">Most Popular</span>
+                                    </div>
+                                    <div class="meal-plan-body">
+                                        <p class="meal-plan-description">Chef-Crafted Variety</p>
+                                        <div class="meal-examples">
+                                            <div class="meal-time">
+                                                <h5>Key Features:</h5>
+                                                <ul class="meal-features">
+                                                    <li>Chef-designed recipes</li>
+                                                    <li>Seasonal ingredients</li>
+                                                    <li>Common allergens: nuts, soy</li>
+                                                </ul>
+                                            </div>
+                                            <div class="meal-time">
+                                                <h5>Sample Meals:</h5>
+                                                <ul class="meal-features">
+                                                    <li>Breakfast: Quinoa Breakfast Bowl</li>
+                                                    <li>Lunch: Buddha Bowl (nuts, soy)</li>
+                                                    <li>Dinner: Cauliflower Steak</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="meal-plan-btn">Select Plan</button>
+                                </div>
+
+                                <!-- Meal Plan 3 -->
+                                <div class="meal-plan">
+                                    <div class="meal-plan-header">
+                                        <h4>Performance Pro</h4>
+                                        <span class="meal-plan-price">$99.99/week</span>
+                                    </div>
+                                    <div class="meal-plan-body">
+                                        <p class="meal-plan-description">High-Protein Athletic</p>
+                                        <div class="meal-examples">
+                                            <div class="meal-time">
+                                                <h5>Key Features:</h5>
+                                                <ul class="meal-features">
+                                                    <li>30g+ plant protein per meal</li>
+                                                    <li>Macro-optimized meals</li>
+                                                    <li>Common allergens: nuts, soy</li>
+                                                </ul>
+                                            </div>
+                                            <div class="meal-time">
+                                                <h5>Sample Meals:</h5>
+                                                <ul class="meal-features">
+                                                    <li>Breakfast: Tofu Scramble</li>
+                                                    <li>Lunch: Raw Pad Thai (nuts)</li>
+                                                    <li>Dinner: Mushroom Tartare</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="meal-plan-btn">Select Plan</button>
+                                </div>
+
+                                <!-- Meal Plan 4 -->
+                                <div class="meal-plan">
+                                    <div class="meal-plan-header">
+                                        <h4>Family Feast</h4>
+                                        <span class="meal-plan-price">$129.99/week</span>
+                                    </div>
+                                    <div class="meal-plan-body">
+                                        <p class="meal-plan-description">Kid-Friendly Family Plan</p>
+                                        <div class="meal-examples">
+                                            <div class="meal-time">
+                                                <h5>Key Features:</h5>
+                                                <ul class="meal-features">
+                                                    <li>4-6 servings per meal</li>
+                                                    <li>Kid-approved recipes</li>
+                                                    <li>Common allergens: gluten, nuts</li>
+                                                </ul>
+                                            </div>
+                                            <div class="meal-time">
+                                                <h5>Sample Meals:</h5>
+                                                <ul class="meal-features">
+                                                    <li>Breakfast: Banana Pancakes</li>
+                                                    <li>Lunch: Jackfruit 'Crab' Cakes (gluten)</li>
+                                                    <li>Dinner: Vegan Chocolate Cake (gluten, nuts)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="meal-plan-btn">Select Plan</button>
+                                </div>
+
+                                <!-- Meal Plan 5 -->
+                                <div class="meal-plan">
+                                    <div class="meal-plan-header">
+                                        <h4>Gourmet Explorer</h4>
+                                        <span class="meal-plan-price">$109.99/week</span>
+                                    </div>
+                                    <div class="meal-plan-body">
+                                        <p class="meal-plan-description">Global Cuisine Adventure</p>
+                                        <div class="meal-examples">
+                                            <div class="meal-time">
+                                                <h5>Key Features:</h5>
+                                                <ul class="meal-features">
+                                                    <li>Global ingredients</li>
+                                                    <li>Executive chef recipes</li>
+                                                    <li>Common allergens: varies by dish</li>
+                                                </ul>
+                                            </div>
+                                            <div class="meal-time">
+                                                <h5>Sample Meals:</h5>
+                                                <ul class="meal-features">
+                                                    <li>Breakfast: Miso Soup (soy)</li>
+                                                    <li>Lunch: Spring Rolls (gluten, soy)</li>
+                                                    <li>Dinner: Coconut Chia Pudding (coconut)</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="meal-plan-btn">Select Plan</button>
+                                </div>
+                            </div>
+                            <!-- Add pagination dots for mobile -->
+                            <div class="meal-plans-pagination">
+                                <div class="pagination-dot active" data-index="0"></div>
+                                <div class="pagination-dot" data-index="1"></div>
+                                <div class="pagination-dot" data-index="2"></div>
+                                <div class="pagination-dot" data-index="3"></div>
+                                <div class="pagination-dot" data-index="4"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="our-farms" class="service-content">
+                        <div class="service-content-header">
+                            <button class="back-to-services" onclick="hideServiceContent()">
+                                <i class="fas fa-arrow-left"></i> Back to Services
+                            </button>
+                            <h3>Our Sustainable Farms</h3>
+                        </div>
+                        <div class="service-content-body">
+                            <div class="farms-grid">
+                                <!-- Farm 1 -->
+                                <div class="farm-card">
+                                    <div class="farm-image">
+                                        <img src="Images/farm1.jpg" alt="Sunrise Valley Farm" onerror="this.src='https://placehold.co/600x400?text=Sunrise+Valley+Farm'">
+                                    </div>
+                                    <div class="farm-info">
+                                        <h4>Sunrise Valley Farm</h4>
+                                        <p class="farm-location">Charlotte, NC</p>
+                                        <p class="farm-description">Our flagship partner farm located just 15 miles from our restaurant. Specializing in heirloom vegetables and microgreens grown using no-till methods that preserve soil health.</p>
+                                        <ul class="farm-features">
+                                            <li>100% Solar powered</li>
+                                            <li>Rainwater harvesting</li>
+                                            <li>Composting program</li>
+                                            <li>Educational tours available</li>
+                                        </ul>
+                                        <button class="farm-btn">Learn More</button>
+                                    </div>
+                                </div>
+
+                                <!-- Farm 2 -->
+                                <div class="farm-card">
+                                    <div class="farm-image">
+                                        <img src="Images/farm2.jpg" alt="Green Meadows Cooperative" onerror="this.src='https://placehold.co/600x400?text=Green+Meadows+Cooperative'">
+                                    </div>
+                                    <div class="farm-info">
+                                        <h4>Green Meadows Cooperative</h4>
+                                        <p class="farm-location">Asheville, NC</p>
+                                        <p class="farm-description">A collective of small-scale farmers working together to grow diverse crops using permaculture principles. Their innovative crop rotation system enhances biodiversity.</p>
+                                        <ul class="farm-features">
+                                            <li>Worker-owned cooperative</li>
+                                            <li>Agroforestry techniques</li>
+                                            <li>Heritage seed preservation</li>
+                                            <li>Community supported agriculture</li>
+                                        </ul>
+                                        <button class="farm-btn">Learn More</button>
+                                    </div>
+                                </div>
+
+                                <!-- Farm 3 -->
+                                <div class="farm-card">
+                                    <div class="farm-image">
+                                        <img src="Images/farm3.jpg" alt="Future Harvest Vertical Farm" onerror="this.src='https://placehold.co/600x400?text=Future+Harvest+Vertical+Farm'">
+                                    </div>
+                                    <div class="farm-info">
+                                        <h4>Future Harvest Vertical Farm</h4>
+                                        <p class="farm-location">Durham, NC</p>
+                                        <p class="farm-description">Our high-tech urban farming partner using vertical hydroponic systems to grow leafy greens and herbs year-round with 95% less water than conventional farming.</p>
+                                        <ul class="farm-features">
+                                            <li>Zero pesticide use</li>
+                                            <li>LED lighting optimization</li>
+                                            <li>Closed-loop water systems</li>
+                                            <li>AI-controlled growing conditions</li>
+                                        </ul>
+                                        <button class="farm-btn">Learn More</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="food-generator" class="service-content">
+                        <div class="service-content-header">
+                            <button class="back-to-services" onclick="hideServiceContent()">
+                                <i class="fas fa-arrow-left"></i> Back to Services
+                            </button>
+                            <h3>Custom Food Generator</h3>
+                        </div>
+                        <div class="service-content-body">
+                            <div class="generator-container">
+                                <div class="generator-form">
+                                    <div class="form-group">
+                                        <label for="dietary-preference">Dietary Preference</label>
+                                        <select id="dietary-preference">
+                                            <option value="all">All Plant-Based</option>
+                                            <option value="gluten-free">Gluten-Free</option>
+                                            <option value="nut-free">Nut-Free</option>
+                                            <option value="soy-free">Soy-Free</option>
+                                            <option value="raw">Raw Foods</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="meal-type">Meal Type</label>
+                                        <select id="meal-type">
+                                            <option value="breakfast">Breakfast</option>
+                                            <option value="lunch">Lunch</option>
+                                            <option value="dinner">Dinner</option>
+                                            <option value="snack">Snack</option>
+                                            <option value="dessert">Dessert</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="calories">Calorie Range</label>
+                                        <select id="calories">
+                                            <option value="300-500">300-500 calories</option>
+                                            <option value="500-700">500-700 calories</option>
+                                            <option value="700-900">700-900 calories</option>
+                                            <option value="900+">900+ calories</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="cuisine">Cuisine Inspiration</label>
+                                        <select id="cuisine">
+                                            <option value="mediterranean">Mediterranean</option>
+                                            <option value="asian">Asian</option>
+                                            <option value="latin">Latin American</option>
+                                            <option value="african">African</option>
+                                            <option value="fusion">Global Fusion</option>
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="ingredients">Favorite Ingredients (Optional)</label>
+                                        <input type="text" id="ingredients" placeholder="e.g., avocado, quinoa, mushrooms">
+                                    </div>
+                                    
+                                    <button class="generator-btn">Generate My Meal</button>
+                                </div>
+                                
+                                <div class="generator-result">
+                                    <h4>Your Custom Meal</h4>
+                                    <p class="placeholder-text">Your personalized meal suggestion will appear here after you generate it.</p>
+                                    <!-- Results will be dynamically inserted here -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="virtual-tour" class="service-content">
+                        <div class="service-content-header">
+                            <button class="back-to-services" onclick="hideServiceContent()">
+                                <i class="fas fa-arrow-left"></i> Back to Services
+                            </button>
+                            <h3>Virtual Tour Experience</h3>
+                        </div>
+                        <div class="service-content-body">
+                            <div class="coming-soon-container">
+                                <div class="coming-soon-badge">
+                                    <span>Coming Soon</span>
+                                </div>
+                                <div class="coming-soon-info">
+                                    <h4>Experience Green Bites Like Never Before</h4>
+                                    <p>Our immersive virtual tour will allow you to explore our restaurant, kitchen, and partner farms from anywhere in the world. Get an exclusive behind-the-scenes look at how we prepare our sustainable, plant-based cuisine.</p>
+                                    
+                                    <div class="tour-features">
+                                        <div class="tour-feature">
+                                            <i class="feature-icon">🍽️</i>
+                                            <h5>Restaurant Tour</h5>
+                                            <p>Explore our dining areas, sustainable design elements, and unique atmosphere</p>
+                                        </div>
+                                        <div class="tour-feature">
+                                            <i class="feature-icon">👨‍🍳</i>
+                                            <h5>Kitchen Access</h5>
+                                            <p>Watch our chefs in action and see how we prepare our signature dishes</p>
+                                        </div>
+                                        <div class="tour-feature">
+                                            <i class="feature-icon">🌱</i>
+                                            <h5>Farm Visits</h5>
+                                            <p>Tour our partner farms and learn about sustainable growing practices</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <form class="notification-form">
+                                        <h5>Get Notified When We Launch</h5>
+                                        <div class="form-row">
+                                            <input type="email" placeholder="Your email address" required>
+                                            <button type="submit" class="notify-btn">Notify Me</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="service-box" onclick="showService('catering')">
-                <h3>Catering</h3>
-                <p>Delicious plant-based catering options for your events and gatherings.</p>
-            </div>
-            <div class="service-box" onclick="showService('farms')">
-                <h3>Food Translator</h3>
-                <p>Learn about our partnerships with local farms and sustainable practices.</p>
-            </div>
-            <div class="service-box" onclick="showService('virtual-tour')">
-                <h3>Virtual Tour</h3>
-                <p>Experience our kitchen and farm through an interactive virtual tour.</p>
-            </div>
-        </div>
-        <div id="service-content" class="service-content" style="display: none;">
-            <button class="back-button" onclick="backToServices()">← Back</button>
-            <div id="content-area"></div>
         </div>
     </section>
 

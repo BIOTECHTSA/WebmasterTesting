@@ -2152,10 +2152,10 @@
                     category: "Main Course"
                 },
                 {
-                    name: "Jackfruit Pulled 'Pork'",
+                    name: "BBQ Seitan Steak",
                     type: "vegan",
-                    calories: "320",
-                    allergens: "Soy",
+                    calories: "340",
+                    allergens: "Gluten, Soy",
                     category: "Main Course"
                 },
                 {
@@ -2180,6 +2180,13 @@
                     category: "Desserts"
                 },
                 {
+                    name: "Matcha Cheesecake",
+                    type: "vegetarian",
+                    calories: "350",
+                    allergens: "Dairy, Gluten",
+                    category: "Desserts"
+                },
+                {
                     name: "Mango Lassi",
                     type: "vegetarian",
                     calories: "180",
@@ -2190,6 +2197,13 @@
                     name: "Sparkling Elderflower",
                     type: "vegan",
                     calories: "90",
+                    allergens: "None",
+                    category: "Beverages"
+                },
+                {
+                    name: "Hibiscus Iced Tea",
+                    type: "vegan",
+                    calories: "60",
                     allergens: "None",
                     category: "Beverages"
                 }
@@ -2227,10 +2241,9 @@
                             </div>
                             <div class="item-content">
                                 <h4>${item.name} <span class="${item.type}-badge">${item.type.charAt(0).toUpperCase() + item.type.slice(1)}</span></h4>
-                                <div class="item-info">
-                                    <i class="fas fa-info-circle info-icon">
-                                        <span class="tooltip">Calories: ${item.calories}<br>Allergens: ${item.allergens}</span>
-                                    </i>
+                                <div class="item-details">
+                                    <span class="calories">Calories: ${item.calories} </span>
+                                    <span class="allergens">Allergens: ${item.allergens}</span>
                                 </div>
                             </div>
                         </div>
@@ -2249,3 +2262,4 @@
             // ... existing code ...
             setupCateringToggle();
         });
+        // ... existing code ...

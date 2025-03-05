@@ -2116,3 +2116,136 @@
                 }
             });
         });
+
+        // ... existing code ...
+
+        // ... existing code ...
+        function setupCateringToggle() {
+            const toggleBtns = document.querySelectorAll('.catering-toggle .toggle-btn');
+            const dinnerItems = [
+                {
+                    name: "Grilled Artichoke Hearts",
+                    type: "vegan",
+                    calories: "180",
+                    allergens: "None",
+                    category: "Starters"
+                },
+                {
+                    name: "Wild Mushroom Soup",
+                    type: "vegan",
+                    calories: "220",
+                    allergens: "None",
+                    category: "Starters"
+                },
+                {
+                    name: "Spinach and Ricotta Rolls",
+                    type: "vegetarian",
+                    calories: "280",
+                    allergens: "Dairy, Gluten",
+                    category: "Starters"
+                },
+                {
+                    name: "Eggplant Parmesan",
+                    type: "vegetarian",
+                    calories: "450",
+                    allergens: "Dairy, Gluten",
+                    category: "Main Course"
+                },
+                {
+                    name: "Jackfruit Pulled 'Pork'",
+                    type: "vegan",
+                    calories: "320",
+                    allergens: "Soy",
+                    category: "Main Course"
+                },
+                {
+                    name: "Coconut Curry Noodles",
+                    type: "vegan",
+                    calories: "380",
+                    allergens: "Coconut, Soy",
+                    category: "Main Course"
+                },
+                {
+                    name: "Tiramisu",
+                    type: "vegetarian",
+                    calories: "380",
+                    allergens: "Dairy, Gluten",
+                    category: "Desserts"
+                },
+                {
+                    name: "Raw Chocolate Truffles",
+                    type: "vegan",
+                    calories: "220",
+                    allergens: "Nuts",
+                    category: "Desserts"
+                },
+                {
+                    name: "Mango Lassi",
+                    type: "vegetarian",
+                    calories: "180",
+                    allergens: "Dairy",
+                    category: "Beverages"
+                },
+                {
+                    name: "Sparkling Elderflower",
+                    type: "vegan",
+                    calories: "90",
+                    allergens: "None",
+                    category: "Beverages"
+                }
+            ];
+
+            toggleBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active state
+                    toggleBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    // Switch menu items based on time of day
+                    if (btn.dataset.time === 'dinner') {
+                        updateMenuItems(dinnerItems);
+                    } else {
+                        // Reset to lunch menu (default view)
+                        resetToLunchMenu();
+                    }
+                });
+            });
+        }
+
+        function updateMenuItems(items) {
+            const categories = document.querySelectorAll('.menu-category');
+            categories.forEach(category => {
+                const categoryName = category.querySelector('h3').textContent;
+                const categoryItems = items.filter(item => item.category === categoryName);
+                const itemsContainer = category.querySelector('.catering-items');
+                
+                if (categoryItems.length > 0) {
+                    itemsContainer.innerHTML = categoryItems.map(item => `
+                        <div class="catering-item">
+                            <div class="item-image">
+                                <img src="https://placehold.co/300x200?text=${item.name.replace(/ /g, '+')}" alt="${item.name}">
+                            </div>
+                            <div class="item-content">
+                                <h4>${item.name} <span class="${item.type}-badge">${item.type.charAt(0).toUpperCase() + item.type.slice(1)}</span></h4>
+                                <div class="item-info">
+                                    <i class="fas fa-info-circle info-icon">
+                                        <span class="tooltip">Calories: ${item.calories}<br>Allergens: ${item.allergens}</span>
+                                    </i>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                }
+            });
+        }
+
+        function resetToLunchMenu() {
+            // The lunch menu is the default HTML structure, so we just need to refresh the page
+            location.reload();
+        }
+
+        // Add to the DOMContentLoaded event listener
+        document.addEventListener('DOMContentLoaded', function() {
+            // ... existing code ...
+            setupCateringToggle();
+        });

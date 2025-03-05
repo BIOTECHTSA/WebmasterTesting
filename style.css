@@ -1750,34 +1750,98 @@ button,
 
 .info-icon {
     position: relative;
+    display: inline-flex;
+    align-items: center;
     cursor: pointer;
     margin-left: 5px;
 }
 
 .tooltip {
-    display: none; /* Initially hidden */
     position: absolute;
     background-color: var(--primary-color);
     color: var(--light-text);
-    padding: 5px 10px;
-    border-radius: 5px;
-    z-index: 1000;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 0.8em;
+    line-height: 1.2;
     width: max-content;
-    max-width: 200px;
-    text-align: center;
-    opacity: 0; /* Start with opacity 0 */
-    visibility: hidden; /* Start with visibility hidden */
+    max-width: 150px;
+    text-align: left;
+    opacity: 0;
+    visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
-    top: -5px; /* Position above the icon */
-    left: 50%;
-    transform: translateX(-50%);
+    bottom: calc(100% + 8px);
+    left: calc(100% + 8px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: -4px;
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary-color);
+    transform: rotate(45deg);
 }
 
 .info-icon:hover .tooltip,
 .info-icon:focus .tooltip {
-    display: block; /* Show on hover */
-    opacity: 1; /* Fade in */
-    visibility: visible; /* Make it visible */
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (max-width: 768px) {
+    .tooltip {
+        max-width: 120px;
+        font-size: 0.75em;
+        padding: 4px 8px;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .info-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .tooltip {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%;
+        max-width: 280px;
+        padding: 12px 16px;
+        text-align: center;
+        background-color: rgba(56, 102, 65, 0.95);
+        backdrop-filter: blur(4px);
+        border-radius: 8px;
+    }
+
+    .tooltip::after {
+        display: none;
+    }
+}
+
+/* Ensure menu items don't hide tooltips */
+.menu-item {
+    overflow: visible;
+}
+
+.menu-item-content {
+    overflow: visible;
+}
+
+.menu-item-info {
+    overflow: visible;
+}
+
+.catering-item .item-info {
+    position: relative;
+    z-index: 2;
 }
 
 /* Add media queries for mobile adjustments */
@@ -4859,9 +4923,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .info-icon:hover .tooltip,
 .info-icon:focus .tooltip {
-    display: block;
-    opacity: 1;
-    visibility: visible;
+    display: block; /* Show on hover */
+    opacity: 1; /* Fade in */
+    visibility: visible; /* Make it visible */
 }
 
 .popup-container {
@@ -6405,5 +6469,235 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .meal-plan.featured {
         grid-column: span 2;
         max-width: 80%;
+    }
+}
+
+/* Catering Styles */
+.catering-toggle {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.toggle-btn {
+    padding: 10px 30px;
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle-btn.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+.catering-menu-grid {
+    display: grid;
+    gap: 40px;
+    max-width: 100%;
+}
+
+.menu-category {
+    margin-bottom: 40px;
+}
+
+.menu-category h3 {
+    color: var(--primary-color);
+    font-size: 1.8em;
+    margin-bottom: 25px;
+    font-family: 'Playfair Display', serif;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+.catering-items {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.catering-item {
+    background: var(--card-bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.item-content h4 {
+    color: var(--text-color);
+    margin: 0 0 5px 0;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.item-details {
+    text-align: center;
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.item-details .calories,
+.item-details .allergens {
+    display: inline-block;
+    color: #666;
+    font-size: 0.85em;
+}
+
+.item-details .allergens {
+    font-style: italic;
+}
+
+.vegan-badge, .vegetarian-badge {
+    font-size: 0.7em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+}
+
+.vegan-badge {
+    background-color: var(--primary-color);
+}
+
+.vegetarian-badge {
+    background-color: var(--secondary-color);
+}
+
+@media (max-width: 768px) {
+    .item-content h4 {
+        font-size: 1em;
+    }
+    
+    .item-details {
+        font-size: 0.75em;
+    }
+}
+
+.catering-item:hover {
+    transform: translateY(-5px);
+}
+
+.item-image {
+    height: 180px;
+    overflow: hidden;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.catering-item:hover .item-image img {
+    transform: scale(1.1);
+}
+
+.item-content {
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.item-content h4 {
+    font-size: 1.1em;
+    color: var(--text-color);
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.vegan-badge, .vegetarian-badge {
+    font-size: 0.7em;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.vegan-badge {
+    background: #4CAF50;
+    color: white;
+}
+
+.vegetarian-badge {
+    background: #8BC34A;
+    color: white;
+}
+
+.item-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
+/* Responsive styles for catering section */
+@media (max-width: 1200px) {
+    .catering-items {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .catering-items {
+        grid-template-columns: 1fr;
+    }
+    
+    .item-content h4 {
+        font-size: 1em;
+    }
+    
+    .menu-category h3 {
+        font-size: 1.5em;
+    }
+
+    .item-image {
+        height: 160px;
+    }
+}
+
+@media (max-width: 576px) {
+    .catering-toggle {
+        gap: 10px;
+    }
+
+    .toggle-btn {
+        padding: 8px 20px;
+        font-size: 0.9em;
+    }
+
+    .menu-category {
+        margin-bottom: 30px;
+    }
+
+    .catering-items {
+        gap: 15px;
     }
 }

@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Georgia, serif;
+}
+
+html {
+    overflow-x: hidden;
+}
+/*? Codes for the Title Section */
+
+.titleSection {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0);
+    color: white;
+    overflow: hidden; /* Ensure no overflow */
+    position: relative;
+}
+
+.titleSection-headerContainer {
+    text-align: center;
+    font-size: 2rem;
+    background-color: transparent;
+    padding: 2rem;
+    z-index: 3;
+    position: relative;
+}
+
+.titleSection-headerContainer h1 {
+    font-size: 5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    color: white;
+    position: relative;
+    z-index: 5;
+}
+
+.titleSection-headerContainer-spacer {
+    display: none;
+}
+
+/* & Image Collage */
+.titleSection-imageCollage {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 10px;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    filter: grayscale(100%);
+    overflow: hidden; /* Ensure no overflow */
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0.5;
+}
+
+/*& Image Gallery behind the landing image */
+.titleSection-imageCollage-Trigger{
+    display: none;
+}
+
+.titleSection-imageCollage{
+    position: absolute;
+
+}
+.titleSection-imageCollage-image{
+    position: relative;
+    object-fit: cover;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.heading-right-entry {
+    position: relative;
+    font-size: 82vh;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    color: darkred;
+    font-weight: normal;
+    text-transform: uppercase;
+    z-index: -1; /* Ensure it is behind other elements */
+}
+
+.background-text {
+    position: absolute;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    color:rgb(255, 255, 255);
+}
+
+/* ? Right Scrolling process/F2T Section */
+
+.swipeRightSection {
+    position: relative;
+    width: max-content; /* Change from fixed width to content-based width */
+    height: 100vh;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden;
+}
+
+.swipeRightSection-pane {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 100vh;
+    background: rgb(17, 151, 84);
+    overflow: hidden !important;
+    padding: 2rem;
+}
+
+.swipeRightSection-pane h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: white;
+    text-align: center;
+}
+
+.swipeRightSection-pane p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: white;
+    max-width: 800px;
+    text-align: center;
+}
+
+.swipeRightSection-dividerPane{
+    width: 20vw;
+    background: rgb(8, 80, 44) !important;
+}
+
+.swipeRightSection-dividerPane h1 {
+    color: white;
+    transform: rotate(-90deg);
+    text-wrap: nowrap;
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+    
+.swipeRightSection-dividerPane p {
+    position: absolute;
+    color: white;
+    font-size: 2rem;
+    margin-top: 75vh;
+}
+
+.swipeRightSection-progressBar {
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 10px;
+    background-color: #4CAF50;
+    width: 0%;
+    transition: width 0.3s ease-out;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/*& FTT Content */
+
+
+/* ! Mo */

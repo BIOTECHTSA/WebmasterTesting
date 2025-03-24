@@ -660,10 +660,67 @@
                 'Thai Green Curry': './Images/thaigreencurry.jpg'
             };
             
+            // Map of emojis for each dish
+            const emojiMap = {
+                'Spring Rolls': '🥟',
+                'Buddha Bowl': '🥗',
+                'Miso Soup': '🍲',
+                'Raw Pad Thai': '🥢',
+                'Bruschetta': '🍅',
+                'Mediterranean Wrap': '🌯',
+                'Jackfruit \'Crab\' Cakes': '🦀',
+                'Cauliflower Steak': '🥦',
+                'Mushroom Tartare': '🍄',
+                'Wild Mushroom Risotto': '🍚',
+                'Roasted Beet Carpaccio': '🥗',
+                'Thai Green Curry': '🍛',
+                'Chocolate Avocado Mousse': '🍫',
+                'Coconut Chia Pudding': '🥥',
+                'Vegan Berry Tart': '🍓',
+                'Vegan Chocolate Cake': '🎂',
+                'Mango Sorbet': '🥭',
+                'Raw Vegan Cheesecake': '🍰',
+                'Chocolate Avocado Mousse': '🍫',
+                'Coconut Chia Pudding': '🥥',
+                'Vegan Berry Tart': '🍓',
+                'Vegan Chocolate Cake': '🎂',
+                'Mango Sorbet': '🥭',
+                'Raw Vegan Cheesecake': '🍰',
+                // Add dinner menu items
+                'Grilled Artichoke Hearts': '🌱',
+                'Wild Mushroom Soup': '🍄',
+                'Spinach and Ricotta Rolls': '🥬',
+                'Eggplant Parmesan': '🍆',
+                'BBQ Seitan Steak': '🥩',
+                'Coconut Curry Noodles': '🥥',
+                'Tiramisu': '🍮',
+                'Raw Chocolate Truffles': '🍫',
+                'Matcha Cheesecake': '🍵',
+                'Mango Lassi': '🥭',
+                'Sparkling Elderflower': '🥂',
+                'Hibiscus Iced Tea': '🧋',
+                // Add lunch menu items
+                'Mediterranean Bruschetta': '🥖',
+                'Wild Mushroom Crostini': '🍄',
+                'Rainbow Hummus Platter': '🥙',
+                'Fresh Spring Rolls': '🌯',
+                'Stuffed Mushrooms': '🍄',
+                'Marinated Tempeh Skewers': '🍢',
+                'Dark Chocolate Mousse': '🍫',
+                'Berry Cheesecake': '🍰',
+                'Fresh Fruit Tart': '🥧',
+                'Green Vitality Smoothie': '🥤',
+                'Probiotic Kombucha': '🍵',
+                'Hibiscus Iced Tea': '🌺'
+            };
+            
             const imageSrc = imageMap[item.name];
+            const itemEmoji = emojiMap[item.name] || '🍽️'; // Default emoji if none is mapped
+            
+            // Change this to use emoji instead of image name
             const imageHtml = imageSrc ? 
-                `<img src="${imageSrc}" alt="${item.name}">` : 
-                `<div class="placeholder"><i class="fas fa-utensils fa-3x"></i></div>`;
+                `<img src="${imageSrc}" alt="${item.name}"><div class="dish-emoji">${itemEmoji}</div>` : 
+                `<div class="placeholder"><div class="dish-emoji">${itemEmoji}</div></div>`;
             
             // Star Rating Logic
             let rating = item.rating || 3.0; // Use the rating from the item, or default to 3.0
@@ -2226,6 +2283,53 @@
             });
         }
 
+        // Global constant for emoji mapping
+        const emojiMap = {
+            'Spring Rolls': '🥟',
+            'Buddha Bowl': '🥗',
+            'Miso Soup': '🍲',
+            'Raw Pad Thai': '🥢',
+            'Bruschetta': '🍅',
+            'Mediterranean Wrap': '🌯',
+            'Jackfruit \'Crab\' Cakes': '🦀',
+            'Cauliflower Steak': '🥦',
+            'Mushroom Tartare': '🍄',
+            'Wild Mushroom Risotto': '🍚',
+            'Roasted Beet Carpaccio': '🥗',
+            'Thai Green Curry': '🍛',
+            'Chocolate Avocado Mousse': '🍫',
+            'Coconut Chia Pudding': '🥥',
+            'Vegan Berry Tart': '🍓',
+            'Vegan Chocolate Cake': '🎂',
+            'Mango Sorbet': '🥭',
+            'Raw Vegan Cheesecake': '🍰',
+            // Dinner menu items
+            'Grilled Artichoke Hearts': '🌱',
+            'Wild Mushroom Soup': '🍄',
+            'Spinach and Ricotta Rolls': '🥬',
+            'Eggplant Parmesan': '🍆',
+            'BBQ Seitan Steak': '🥩',
+            'Coconut Curry Noodles': '🥥',
+            'Tiramisu': '🍮',
+            'Raw Chocolate Truffles': '🍫',
+            'Matcha Cheesecake': '🍵',
+            'Mango Lassi': '🥭',
+            'Sparkling Elderflower': '🥂',
+            'Hibiscus Iced Tea': '🧋',
+            // Lunch menu items
+            'Mediterranean Bruschetta': '🥖',
+            'Wild Mushroom Crostini': '🍄',
+            'Rainbow Hummus Platter': '🥙',
+            'Fresh Spring Rolls': '🌯',
+            'Stuffed Mushrooms': '🍄',
+            'Marinated Tempeh Skewers': '🍢',
+            'Dark Chocolate Mousse': '🍫',
+            'Berry Cheesecake': '🍰',
+            'Fresh Fruit Tart': '🥧',
+            'Green Vitality Smoothie': '🥤',
+            'Probiotic Kombucha': '🍵'
+        };
+
         function updateMenuItems(items) {
             const categories = document.querySelectorAll('.menu-category');
             categories.forEach(category => {
@@ -2234,27 +2338,139 @@
                 const itemsContainer = category.querySelector('.catering-items');
                 
                 if (categoryItems.length > 0) {
-                    itemsContainer.innerHTML = categoryItems.map(item => `
-                        <div class="catering-item">
-                            <div class="item-image">
-                                <img src="https://placehold.co/300x200?text=${item.name.replace(/ /g, '+')}" alt="${item.name}">
-                            </div>
-                            <div class="item-content">
-                                <h4>${item.name} <span class="${item.type}-badge">${item.type.charAt(0).toUpperCase() + item.type.slice(1)}</span></h4>
-                                <div class="item-details">
-                                    <span class="calories">Calories: ${item.calories} </span>
-                                    <span class="allergens">Allergens: ${item.allergens}</span>
+                    itemsContainer.innerHTML = categoryItems.map(item => {
+                        const itemEmoji = emojiMap[item.name] || '🍽️'; // Default emoji if none is mapped
+                        
+                        return `
+                            <div class="catering-item">
+                                <div class="item-image">
+                                    <div class="dish-emoji">${itemEmoji}</div>
+                                </div>
+                                <div class="item-content">
+                                    <h4>${item.name} <span class="${item.type}-badge">${item.type.charAt(0).toUpperCase() + item.type.slice(1)}</span></h4>
+                                    <div class="item-details">
+                                        <span class="calories">Calories: ${item.calories} </span>
+                                        <span class="allergens">Allergens: ${item.allergens}</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    `).join('');
+                        `;
+                    }).join('');
                 }
             });
         }
 
         function resetToLunchMenu() {
-            // The lunch menu is the default HTML structure, so we just need to refresh the page
-            location.reload();
+            const lunchItems = [
+                {
+                    name: "Mediterranean Bruschetta",
+                    type: "vegan",
+                    calories: "120",
+                    allergens: "None",
+                    category: "Starters"
+                },
+                {
+                    name: "Wild Mushroom Crostini",
+                    type: "vegetarian",
+                    calories: "150",
+                    allergens: "Dairy",
+                    category: "Starters"
+                },
+                {
+                    name: "Rainbow Hummus Platter",
+                    type: "vegan",
+                    calories: "180",
+                    allergens: "Sesame",
+                    category: "Starters"
+                },
+                {
+                    name: "Fresh Spring Rolls",
+                    type: "vegan",
+                    calories: "90",
+                    allergens: "None",
+                    category: "Appetizers"
+                },
+                {
+                    name: "Stuffed Mushrooms",
+                    type: "vegetarian",
+                    calories: "140",
+                    allergens: "Dairy",
+                    category: "Appetizers"
+                },
+                {
+                    name: "Marinated Tempeh Skewers",
+                    type: "vegan",
+                    calories: "160",
+                    allergens: "Soy",
+                    category: "Appetizers"
+                },
+                {
+                    name: "Buddha Bowl",
+                    type: "vegan",
+                    calories: "450",
+                    allergens: "None",
+                    category: "Main Course"
+                },
+                {
+                    name: "Wild Mushroom Risotto",
+                    type: "vegetarian",
+                    calories: "380",
+                    allergens: "Dairy",
+                    category: "Main Course"
+                },
+                {
+                    name: "Thai Green Curry",
+                    type: "vegan",
+                    calories: "320",
+                    allergens: "Coconut",
+                    category: "Main Course"
+                },
+                {
+                    name: "Dark Chocolate Mousse",
+                    type: "vegan",
+                    calories: "280",
+                    allergens: "None",
+                    category: "Desserts"
+                },
+                {
+                    name: "Berry Cheesecake",
+                    type: "vegetarian",
+                    calories: "340",
+                    allergens: "Dairy",
+                    category: "Desserts"
+                },
+                {
+                    name: "Fresh Fruit Tart",
+                    type: "vegan",
+                    calories: "260",
+                    allergens: "None",
+                    category: "Desserts"
+                },
+                {
+                    name: "Green Vitality Smoothie",
+                    type: "vegan",
+                    calories: "150",
+                    allergens: "None",
+                    category: "Beverages"
+                },
+                {
+                    name: "Probiotic Kombucha",
+                    type: "vegan",
+                    calories: "80",
+                    allergens: "None",
+                    category: "Beverages"
+                },
+                {
+                    name: "Hibiscus Iced Tea",
+                    type: "vegan",
+                    calories: "60",
+                    allergens: "None",
+                    category: "Beverages"
+                }
+            ];
+            
+            // Use the same function as dinner menu to create a consistent look
+            updateMenuItems(lunchItems);
         }
 
         // Add to the DOMContentLoaded event listener

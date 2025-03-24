@@ -4,7 +4,9 @@
 const lenis = new Lenis({
     duration: 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true
+    smoothWheel: true,
+    touchMultiplier: 2.5, // Better touch sensitivity
+    wheelMultiplier: 1.5 // Better wheel sensitivity
 });
 
 lenis.on('scroll', (e) => {
@@ -115,14 +117,19 @@ const totalWidth = sections.reduce((acc, section) => {
     return acc + (section.classList.contains('swipeRightSection-dividerPane') ? window.innerWidth * 0.2 : window.innerWidth * 0.8);
 }, 0);
 
-// Count the number of sections up to the Achievements section
-const achievementSectionIndex = sections.findIndex(section => 
-    section.querySelector('h1') && section.querySelector('h1').textContent === 'Achievements'
+// Calculate total width without any extra space
+const lastFarmIndex = sections.findIndex(section => 
+    section.querySelector('h1') && section.querySelector('h1').textContent === 'WinterFrost Details'
 );
+
+// Determine actual content width to limit scrolling
+const actualContentWidth = sections.slice(0, lastFarmIndex + 1).reduce((acc, section) => {
+    return acc + (section.classList.contains('swipeRightSection-dividerPane') ? window.innerWidth * 0.2 : window.innerWidth * 0.8);
+}, 0);
 
 // Create a timeline for the horizontal scroll
 const scrollTween = gsap.to(sections, {
-  x: -totalWidth + window.innerWidth,
+  x: -actualContentWidth + window.innerWidth,
   ease: "none",
   scrollTrigger: {
     trigger: ".swipeRightSection",
@@ -130,50 +137,68 @@ const scrollTween = gsap.to(sections, {
     pinSpacing: true,
     scrub: 1, // Smoother scrubbing for better progress bar animation
     markers: TOGGLE_MARKERS,
-    end: () => "+=" + (totalWidth - window.innerWidth),
+    end: () => "+=" + (actualContentWidth - window.innerWidth),
     onUpdate: (self) => {
       // Update progress bar width based on scroll progress
-      // Calculate progress relative to the Achievements section
       const progressBar = document.getElementById('progressBar');
       if (progressBar) {
-        // Calculate the position of the Achievements section
-        const achievementPosition = (achievementSectionIndex + 1) / sections.length;
-        
-        // Scale the progress to reach 100% at the Achievements section
-        let scaledProgress = self.progress / achievementPosition;
-        
-        // Cap at 100% when we reach the Achievements section
-        if (scaledProgress > 1) {
-          scaledProgress = 1;
-        }
-        
-        progressBar.style.width = `${scaledProgress * 100}%`;
+        progressBar.style.width = `${self.progress * 100}%`;
       }
     }
   }
 });
 
+// Enable touch events for mobile scrolling
+const swipeSection = document.querySelector('.swipeRightSection');
+let startX, startScrollLeft;
+
+// Touch start event
+swipeSection.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].pageX;
+    startScrollLeft = window.scrollY;
+}, { passive: true });
+
+// Touch move event
+swipeSection.addEventListener('touchmove', (e) => {
+    if (!startX) return;
+    
+    // Prevent default only if horizontal scroll is detected
+    const touchDeltaX = startX - e.touches[0].pageX;
+    if (Math.abs(touchDeltaX) > 10) {
+        e.preventDefault();
+    }
+}, { passive: false });
+
+// Detect mobile devices for better touch handling
+const isMobileDevice = () => {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+};
+
+// Adjust touch sensitivity for mobile devices
+if (isMobileDevice()) {
+    lenis.options.touchMultiplier = 3;
+}
+
 /*
 & Heading Right Entry
 & Makes anything in the heading-right-entry class move from right to left when entering
-~@class: heading-right-entry
+~@class: heading-right-entry, journey-heading
 */
 
-const headingRightEntrys = document.querySelectorAll('.heading-right-entry');
+const headingElements = document.querySelectorAll('.heading-right-entry, .journey-heading');
 
-headingRightEntrys.forEach((headingRightEntry) => {
-    const textLength = headingRightEntry.innerHTML.length - 1; //* Get the length of the text
-    const text = new SplitType(headingRightEntry, { types: 'chars' });
+headingElements.forEach((headingElement) => {
+    const textLength = headingElement.innerHTML.length - 1;
+    const text = new SplitType(headingElement, { types: 'chars' });
     
     gsap.fromTo(text.chars, 
         {
-            x: 100 * textLength, //* Start position (right)
-            
+            x: 100 * textLength,
         },
         {
-            x: -350 * textLength, //* End position (left)
+            x: -350 * textLength,
             scrollTrigger: {
-                trigger: headingRightEntry,
+                trigger: headingElement,
                 start: 'top 80%',
                 end: 'bottom 20%',
                 scrub: true,
@@ -182,8 +207,33 @@ headingRightEntrys.forEach((headingRightEntry) => {
             },
             duration: 10000000,
             stagger: 0.1,
-
         }
     );
+});
+
+/*
+& Journey Timeline Animation
+& Makes the journey timeline items appear with scroll
+~@class: journey-item
+*/
+
+const journeyItems = document.querySelectorAll('.journey-item');
+
+const observerOptions = {
+    threshold: 0.5,
+    rootMargin: "0px"
+};
+
+const journeyObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+journeyItems.forEach(item => {
+    journeyObserver.observe(item);
 });
 

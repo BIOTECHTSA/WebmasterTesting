@@ -9415,12 +9415,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 /* Meal Plans Styles */
 .meal-plans-grid {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     gap: 30px;
     margin-top: 30px;
     width: 100%;
-    max-width: 800px;
+    max-width: 1200px;
     margin-left: auto;
+    flex-wrap: wrap;
+    align-items: stretch;
     margin-right: auto;
 }
 
@@ -9433,11 +9435,14 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     position: relative;
     display: flex;
     flex-direction: column;
+    height: 100%;
+    max-width: calc(33.33%-20px);
+    padding: 20px;
 }
 
 .meal-plan:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .meal-plan.featured {
@@ -10208,17 +10213,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     }
 }
 
-/* Meal Plans Styles */
-.meal-plans-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 30px;
-    width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 /* Remove the positioning styles for 4th and 5th meal plans since we're vertical now */
 * {
@@ -17547,18 +17541,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     padding: 30px;
 }
 
-/* Meal Plans Styles */
-.meal-plans-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 30px;
-    width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .meal-plan {
     background: white;
     border-radius: 15px;
@@ -18129,18 +18111,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     .tour-image-container {
         height: 250px;
     }
-}
-
-/* Meal Plans Styles */
-.meal-plans-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-    margin-top: 30px;
-    width: 100%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .meal-plan {

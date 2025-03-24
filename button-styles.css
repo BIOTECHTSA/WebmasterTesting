@@ -1,0 +1,52 @@
+.explore-farms-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    color: #fff;
+    background: linear-gradient(45deg, #28a745, #218838); /* Dynamic background */
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin: 20px auto;
+    display: block;
+    max-width: 300px; /* Ensures button doesn't get too wide on large screens */
+}
+
+.explore-farms-btn:hover {
+    background: linear-gradient(45deg, #218838, #28a745); /* Reverse gradient on hover */
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+@media (max-width: 600px) {
+    .explore-farms-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+}
+
+.explore-farms-section {
+    padding: 20px 0; /* Add padding for spacing */
+    text-align: center; /* Center the button */
+}
+
+#virtual-tour {
+    position: relative; /* Ensure the container is positioned */
+    width: 100%; /* Full width */
+    height: auto; /* Allow height to adjust based on content */
+    overflow: hidden; /* Hide overflow */
+}
+
+#virtual-tour .service-content-body {
+    position: relative; /* Position the body relatively */
+    padding: 0; /* Remove padding */
+}
+
+#virtual-tour iframe {
+    width: calc(100% + 200px); /* Extend width by 200px */
+    height: 400px; /* Set a fixed height for a rectangular shape */
+    max-height: 70vh; /* Limit height to 70% of the viewport height */
+    border: 0; /* Remove border */
+    margin-left: -100px; /* Center the iframe by shifting it left */
+} 
